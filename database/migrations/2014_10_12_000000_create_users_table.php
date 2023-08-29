@@ -23,14 +23,14 @@ return new class extends Migration
             $table->foreignId('dept')->constrained();
             $table->foreignId('cab')->constrained();
             $table->foreignId('hak')->constrained();
-            $table->string('gol');
+            $table->foreignId('gol')->constrained();
             $table->string('grade');
-            $table->string('tanggal_masuk');
-            $table->string('jabatan');
+            $table->date('tanggal_masuk');
+            $table->foreignId('jabatan')->constrained();
             $table->string('email')->unique();
             $table->string('aktif');
             $table->string('status');
-            $table->string('tgl_kontrak');
+            $table->date('tgl_kontrak');
         });
     }
 
