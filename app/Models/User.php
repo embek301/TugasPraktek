@@ -44,34 +44,38 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function hak()
+    public function haks()
     {
-        return $this->belongsTo(Hak::class, 'id', 'hak');
+        return $this->belongsTo(Hak::class, 'hak', 'id');
     }
 
-    public function cabang()
+    public function cabs()
     {
-        return $this->hasOne(Cabang::class, 'no', 'cab');
+        return $this->belongsTo(Cabang::class, 'cab', 'id');
     }
 
-    public function jabatan()
+    public function jabatans()
     {
-        return $this->hasOne(Jabatan::class, 'no', 'jabatan');
+        return $this->belongsTo(Jabatan::class, 'jabatan', 'id');
     }
-    public function penilai2()
+    public function penilai2s()
     {
-        return $this->hasOne(Penilai2::class, 'no', 'penilai2');
+        return $this->belongsTo(Penilai2::class, 'penilai2', 'id');
     }
-    public function penilai3()
+    public function penilai3s()
     {
-        return $this->hasOne(Penilai3::class, 'no', 'penilai3');
+        return $this->belongsTo(Penilai3::class, 'penilai3', 'id');
     }
-    public function penilai4()
+    public function penilai4s()
     {
-        return $this->hasOne(Penilai4::class, 'no', 'penilai4');
+        return $this->belongsTo(Penilai4::class, 'penilai4', 'id');
     }
-    public function dept()
+    public function depts()
     {
-        return $this->hasOne(Dept::class, 'no', 'dept');
+        return $this->belongsTo(Dept::class, 'dept', 'id');
+    }
+    public function gols()
+    {
+        return $this->belongsTo(Dept::class, 'gol', 'id');
     }
 }

@@ -60,6 +60,7 @@
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5 pt-5">
             @yield('content')
+
         </div>
     </div>
     @vite('resources/js/multiselect-dropdown.js')

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignId('dept')->constrained();
             $table->foreignId('cab')->constrained();
             $table->foreignId('hak')->constrained();
-            $table->foreignId('gol')->constrained();
+            $table->foreignId('golongan')->constrained();
             $table->string('grade');
             $table->date('tanggal_masuk');
             $table->foreignId('jabatan')->constrained();
@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('aktif');
             $table->string('status');
             $table->date('tgl_kontrak');
+            $table->timestamps();
         });
     }
 

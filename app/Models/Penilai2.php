@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Penilai2 extends Model
 {
+    protected $table = 'penilai2s';
     use HasFactory;
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

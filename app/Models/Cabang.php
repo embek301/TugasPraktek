@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cabang extends Model
 {
-    protected $table = 'input_cabangs';
+    protected $table = 'cabs';
     use HasFactory;
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

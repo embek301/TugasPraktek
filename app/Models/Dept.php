@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dept extends Model
 {
+    protected $table = 'depts';
     use HasFactory;
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

@@ -11,28 +11,28 @@ class CabangSeeder extends Seeder
     {
         $data = [
             [
-                'cabang' => 'PUCANG',
+                'name' => 'PUCANG',
                 'admin_unit' => 'FIFIN ANILAH',
                 'pic' => 'KUSNUL HIDAYAH',
                 'head' => 'RACHMANTO ARDIANSYAH',
                 'kabeng' => 'RIZKY TOVANY',
             ],
             [
-                'cabang' => 'JENGGOLO',
+                'name' => 'JENGGOLO',
                 'admin_unit' => 'CHRISTINE PRISKYLA',
                 'pic' => 'WAHYU AIDIN HIDAYAT',
                 'head' => 'RUDY UTOMO',
                 'kabeng' => 'RIZKY TOVANY',
             ],
             [
-                'cabang' => 'TAMAN',
+                'name' => 'TAMAN',
                 'admin_unit' => 'ERDIAN AJIE LAKSONO',
                 'pic' => 'SAYUTIN TEDJO',
                 'head' => 'NENDRA SULAKSANA',
                 'kabeng' => 'EDY SUPRIADI',
             ],
             [
-                'cabang' => 'HO',
+                'name' => 'HO',
                 'admin_unit' => 'FIFIN ANILAH',
                 'pic' => 'KUSNUL HIDAYAH',
                 'head' => 'SEGARYANTO TEJO',
