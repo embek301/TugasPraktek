@@ -10,19 +10,23 @@ class DeptSeeder extends Seeder
     public function run()
     {
         $departments = [
-            ['name' => 'MANAGEMENT'],
-            ['name' => 'HRD dan GAL'],
-            ['name' => 'SERVICE'],
-            ['name' => 'INFORMATION SYSTEM AND TECHNOLOGY'],
-            ['name' => 'CUSTOMER FIRST DEALER'],
-            ['name' => 'MARKETING'],
-            ['name' => 'ADMIN DAN UMUM'],
-            ['name' => 'VARIASI'],
-            ['name' => 'F AND B SERVICE'],
+            null,
+            'MANAGEMENT',
+            'HRD dan GAL',
+            'SERVICE',
+            'INFORMATION SYSTEM AND TECHNOLOGY',
+            'CUSTOMER FIRST DEALER',
+            'MARKETING',
+            'ADMIN DAN UMUM',
+            'VARIASI',
+            'F AND B SERVICE',
+
         ];
 
-        foreach ($departments as $department) {
-            Dept::create($department);
+        foreach ($departments as $name) {
+            Dept::create([
+                'name' => $name,
+            ]);
         }
     }
 }

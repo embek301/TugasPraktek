@@ -63,7 +63,6 @@
 
         </div>
     </div>
-    @vite('resources/js/multiselect-dropdown.js')
     @vite('resources/js/main.js')
     @vite('resources/js/app.js')
 </body>

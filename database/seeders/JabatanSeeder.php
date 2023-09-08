@@ -15,6 +15,7 @@ class JabatanSeeder extends Seeder
     public function run()
     {
         $jabatanData = [
+            null,
             'FINANCE ACCOUNTING AND TAX MANAGER',
             'DIREKTUR',
             'ACTING SALES SUPERVISOR',

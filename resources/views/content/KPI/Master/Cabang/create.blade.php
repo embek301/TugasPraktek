@@ -1,6 +1,13 @@
 @extends('layouts.kpi-layout')
 
 @section('content')
+    <style>
+        /* Define a custom CSS class to style the placeholder color */
+        .custom-placeholder::placeholder {
+            color: #a7a4a4;
+            /* Set your desired color */
+        }
+    </style>
     <div class="container-sm mt-5">
         <form action="{{ route('cabang.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -15,43 +22,45 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="nama_cabang" class="form-label">Nama Cabang</label>
-                            <input class="form-control @error('nama_cabang')is-invalid @enderror" type="text"
-                                name="nama_cabang" id="nama_cabang" value="{{ old('nama_cabang') }}"
-                                placeholder="Masukkan Nama ">
+                            <input class="form-control @error('nama_cabang')is-invalid @enderror custom-placeholder"
+                                type="text" name="nama_cabang" id="nama_cabang" value="{{ old('nama_cabang') }}"
+                                placeholder="Masukkan Nama Cabang ">
                             @error('nama_cabang')
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="nama_admin" class="form-label">Nama Admin Unit</label>
-                            <input class="form-control @error('nama_admin')is-invalid @enderror" type="text"
-                                name="nama_admin" id="nama_admin" value="{{ old('nama_admin') }}"
-                                placeholder="Masukkan Nama ">
+                            <input class="form-control @error('nama_admin')is-invalid @enderror custom-placeholder"
+                                type="text" name="nama_admin" id="nama_admin" value="{{ old('nama_admin') }}"
+                                placeholder="Masukkan Nama Admin Unit">
                             @error('nama_admin')
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="nama_pic" class="form-label">Nama PIC</label>
-                            <input class="form-control @error('nama_pic')is-invalid @enderror" type="text"
-                                name="nama_pic" id="nama_pic" value="{{ old('nama_pic') }}" placeholder="Masukkan Nama ">
+                            <input class="form-control @error('nama_pic')is-invalid @enderror custom-placeholder"
+                                type="text" name="nama_pic" id="nama_pic" value="{{ old('nama_pic') }}"
+                                placeholder="Masukkan Nama PIC ">
                             @error('nama_pic')
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="nama_head" class="form-label">Nama Head</label>
-                            <input class="form-control @error('nama_head')is-invalid @enderror" type="text"
-                                name="nama_head" id="nama_head" value="{{ old('nama_head') }}" placeholder="Masukkan Nama ">
+                            <input class="form-control @error('nama_head')is-invalid @enderror custom-placeholder"
+                                type="text" name="nama_head" id="nama_head" value="{{ old('nama_head') }}"
+                                placeholder="Masukkan Nama ">
                             @error('nama_head')
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="nama_kabeng" class="form-label">Nama Kabeng</label>
-                            <input class="form-control @error('nama_kabeng')is-invalid @enderror" type="text"
-                                name="nama_kabeng" id="nama_kabeng" value="{{ old('nama_kabeng') }}"
-                                placeholder="Masukkan Nama ">
+                            <input class="form-control @error('nama_kabeng')is-invalid @enderror custom-placeholder"
+                                type="text" name="nama_kabeng" id="nama_kabeng" value="{{ old('nama_kabeng') }}"
+                                placeholder="Masukkan Nama Kabeng">
                             @error('nama_kabeng')
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                             @enderror

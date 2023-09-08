@@ -10,6 +10,7 @@ class Penilai2Seeder extends Seeder
     public function run()
     {
         $data = [
+            null,
             'SEGARYANTO TEJO',
             'SULIAWATI TEDJO',
             'RIZKY TOVANY',

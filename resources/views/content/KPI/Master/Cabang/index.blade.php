@@ -15,7 +15,7 @@
             auth()->user()->hak == 10)
         <ul class="list-inline mb-2 float-end">
             <li class="list-inline-item">
-                <a href="{{ route('cabang.create') }}" class="btn btn-primary">
+                <a href="{{ route('cabang.create') }}" class="btn btn-gold">
                     <i class="fa fa-id-badge me-1"></i> Tambahkan Cabang
                 </a>
             </li>
@@ -35,46 +35,69 @@
                 </thead>
                 <tbody>
                     @foreach ($cabang as $index => $cab)
-                        <tr>
-                            <td align="center">{{ $index + 1 }}</td>
-                            <td>{{ $cab->name }}</td>
-                            <td>{{ $cab->admin_unit }}</td>
-                            <td>{{ $cab->pic }}</td>
-                            <td>{{ $cab->head }}</td>
-                            <td>{{ $cab->kabeng }}</td>
-                            <td>
-                                <div class="d-flex">
-                                    <div>
-                                        <a href=""class="btn btn-outline-warning btn-sm me-2">
-                                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                                            Edit
-                                        </a>
+                        @if ($cab->name != null)
+                            <tr>
+                                <td align="center">{{ $index }}</td>
+                                <td>{{ $cab->name }}</td>
+                                <td>{{ $cab->admin_unit }}</td>
+                                <td>{{ $cab->pic }}</td>
+                                <td>{{ $cab->head }}</td>
+                                <td>{{ $cab->kabeng }}</td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div>
+                                            <a
+                                                href="{{ route('cabang.edit', $cab->id) }}"class="btn btn-outline-warning btn-sm me-2">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                Edit
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <form action="{{ route('cabang.destroy', $cab->id) }}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn btn-outline-danger btn-sm me-2 btn-delete"
+                                                    data-name="{{ $cab->name }}">
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                    Hapus
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <form action="{{ route('cabang.destroy', $cab->id) }}" method="POST">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn-outline-danger btn-sm me-2 btn-delete"
-                                                data-name="{{ $cab->id . ' ' . $cab->name }}">
-                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                                Hapus
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>
-
         </div>
     @endif
-    @push('scripts')
-        <script type="module">
-            $(document).ready(function() {
-                $('#cabangTable').DataTable();
-            });
-        </script>
-    @endpush
 @endsection
+@push('scripts')
+    <script type="module">
+        $(document).ready(function() {
+            $('#cabangTable').DataTable();
+
+            $(".datatable").on("click", ".btn-delete", function(e) {
+                e.preventDefault();
+
+                var form = $(this).closest("form");
+                var name = $(this).data("name");
+
+                Swal.fire({
+                    title: "Anda yakin ingin menghapus Cabang " + name + "?",
+                    text: "Anda tidak bisa mengembalikan data!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: "Iya, Hapus!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

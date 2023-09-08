@@ -11,6 +11,13 @@ class CabangSeeder extends Seeder
     {
         $data = [
             [
+                'name' => null,
+                'admin_unit' => null,
+                'pic' => null,
+                'head' => null,
+                'kabeng' => null,
+            ],
+            [
                 'name' => 'PUCANG',
                 'admin_unit' => 'FIFIN ANILAH',
                 'pic' => 'KUSNUL HIDAYAH',
@@ -38,7 +45,6 @@ class CabangSeeder extends Seeder
                 'head' => 'SEGARYANTO TEJO',
                 'kabeng' => 'RIZKY TOVANY',
             ],
-            // Add more data entries if needed
         ];
 
         foreach ($data as $entry) {

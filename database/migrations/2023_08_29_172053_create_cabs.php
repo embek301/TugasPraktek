@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('cabs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('admin_unit');
-            $table->string('pic');
-            $table->string('head');
-            $table->string('kabeng');
+            $table->string('name')->nullable();
+            $table->string('admin_unit')->nullable();
+            $table->string('pic')->nullable();
+            $table->string('head')->nullable();
+            $table->string('kabeng')->nullable();
             $table->timestamps();
         });
     }

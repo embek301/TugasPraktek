@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             Penilai2Seeder::class,
             Penilai3Seeder::class,
             Penilai4Seeder::class,
+            UserSeeder::class
         ]);
     }
 }

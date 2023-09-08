@@ -24,13 +24,13 @@ return new class extends Migration
             $table->foreignId('cab')->constrained();
             $table->foreignId('hak')->constrained();
             $table->foreignId('golongan')->constrained();
-            $table->string('grade');
-            $table->date('tanggal_masuk');
+            $table->string('grade')->nullable();
+            $table->date('tanggal_masuk')->nullable();
             $table->foreignId('jabatan')->constrained();
             $table->string('email')->unique();
             $table->string('aktif');
-            $table->string('status');
-            $table->date('tgl_kontrak');
+            $table->string('status')->nullable();
+            $table->date('tgl_kontrak')->nullable();
             $table->timestamps();
         });
     }

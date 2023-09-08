@@ -1,6 +1,13 @@
 @extends('layouts.kpi-layout')
 
 @section('content')
+    <style>
+        /* Define a custom CSS class to style the placeholder color */
+        .custom-placeholder::placeholder {
+            color: #a7a4a4;
+            /* Set your desired color */
+        }
+    </style>
     <div class="container-sm mt-5">
         <form action="{{ route('pen4.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -15,8 +22,8 @@
                     <div class="row">
                         <div class="col-md-14">
                             <label for="nama_penilai4" class="form-label">Nama Penilai 4</label>
-                            <input class="form-control @error('nama_penilai4')is-invalid @enderror" type="text"
-                                name="nama_penilai4" id="nama_penilai4" value="{{ old('nama_penilai4') }}"
+                            <input class="form-control @error('nama_penilai4')is-invalid @enderror custom-placeholder"
+                                type="text" name="nama_penilai4" id="nama_penilai4" value="{{ old('nama_penilai4') }}"
                                 placeholder="Masukkan Nama " oninput="this.value = this.value.toUpperCase()">
                             @error('nama_penilai4')
                                 <div class="text-danger"><small>{{ $message }}</small></div>

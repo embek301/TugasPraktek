@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers\Master;
 
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\Controller;
 use App\Models\Dept;
 use Illuminate\Http\Request;
@@ -31,6 +32,7 @@ class DepartementController extends Controller
     {
         $pageTitle = 'Master Departement';
         $dept = Dept::all();
+        confirmDelete();
         return view('content.KPI.Master.Departement.index', compact('pageTitle', 'dept'));
     }
     public function create()
@@ -58,6 +60,39 @@ class DepartementController extends Controller
         $dept->id = $maxId + 1;
         $dept->name = $request->nama_dept;
         $dept->save();
+        Alert::success('Departement Ditambahkan', 'Data Departement Baru Berhasil Ditambahkan');
+        return redirect()->route('departement.index');
+    }
+
+    public function edit(string $id)
+    {
+        $pageTitle = 'Edit Departement';
+        $dept = Dept::find($id);
+        Alert::success('Berhasil Diedit', 'Data Departement Berhasil Diedit');
+        return view('content.KPI.Master.Departement.edit', compact('pageTitle', 'dept'));
+    }
+
+
+    public function update(Request $request, string $id)
+    {
+        $messages = [
+            'required' => ':Attribute harus diisi.',
+        ];
+        $validator = Validator::make($request->all(), [
+            'nama_dept' => 'required|unique:depts,name,' . $id // Add the ID to exclude from unique check
+        ], $messages);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+
+        // Find the existing cabang record to update
+        $dept = Dept::find($id);
+        if (!$dept) {
+            return redirect()->route('departement.index');
+        }
+        $dept->name = $request->nama_dept;
+        $dept->save();
         return redirect()->route('departement.index');
     }
 
@@ -72,7 +107,7 @@ class DepartementController extends Controller
             $dept->id = $index + 1;
             $dept->save();
         }
-
+        Alert::success('Berhasil dihapus', 'Departement Berhasil Dihapus.');
         return redirect()->route('departement.index');
     }
 }

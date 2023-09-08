@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Penilai4;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Penilai4Controller extends Controller
 {
@@ -29,13 +29,14 @@ class Penilai4Controller extends Controller
 
     public function index()
     {
-        $pageTitle = 'Master Penilai4';
+        $pageTitle = 'Master Penilai-4';
         $pen4 = Penilai4::all();
+        confirmDelete();
         return view('content.KPI.Master.Penilai.Penilai4.index', compact('pageTitle', 'pen4'));
     }
     public function create()
     {
-        $pageTitle = 'Input Data Penilai 4';
+        $pageTitle = 'Input Data Penilai-4';
         $pen4 = Penilai4::all();
         return view('content.KPI.Master.Penilai.Penilai4.create', compact('pageTitle', 'pen4'));
     }
@@ -57,6 +58,36 @@ class Penilai4Controller extends Controller
         $penilai4->id = $maxId + 1;
         $penilai4->name = $request->nama_penilai4;
         $penilai4->save();
+        Alert::success('Penilai-4 Ditambahkan', 'Data Penilai-4 Baru Berhasil Ditambahkan');
+        return redirect()->route('pen4.index');
+    }
+    public function edit(string $id)
+    {
+        $pageTitle = 'Edit Penilai-4';
+        $penilai4 = Penilai4::find($id);
+        return view('content.KPI.Master.penilai.Penilai4.edit', compact('pageTitle', 'penilai4'));
+    }
+
+
+    public function update(Request $request, string $id)
+    {
+        $messages = [
+            'required' => ':Attribute harus diisi.',
+        ];
+        $validator = Validator::make($request->all(), [
+            'nama_penilai4' => 'required|unique:Penilai4s,name,' . $id // Add the ID to exclude from unique check
+        ], $messages);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        // Find the existing cabang record to update
+        $penilai4 = Penilai4::find($id);
+        if (!$penilai4) {
+            return redirect()->route('pen4.index');
+        }
+        $penilai4->name = $request->nama_penilai4;
+        $penilai4->save();
+        Alert::success('Penilai-4 Diedit', 'Data Penilai-4 Baru Berhasil Diedit');
         return redirect()->route('pen4.index');
     }
 
@@ -71,7 +102,7 @@ class Penilai4Controller extends Controller
             $penilai4->id = $index + 1;
             $penilai4->save();
         }
-
+        Alert::success('Penilai-4 Dihapus', 'Data Penilai-4 Berhasil Dihapus');
         return redirect()->route('pen4.index');
     }
 }

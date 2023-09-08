@@ -14,6 +14,7 @@ class GolonganSeeder extends Seeder
     public function run(): void
     {
         $data = [
+            null,
             'I A',
             'I B',
             'I C',

@@ -4,12 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ $pageTitle }}</title>
-
     <!-- Fonts -->
     {{-- <link rel="dns-prefetch" href="//fonts.bunny.net"> --}}
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
@@ -21,12 +18,7 @@
     <!-- Scripts -->
     @vite('resources/sass/app.scss')
     @vite('resources/css/home.css')
-    {{-- @vite('resources/css/nav.css') --}}
-    <style>
-        .multiselect-dropdown {
-            width: 100% !important;
-        }
-    </style>
+
 </head>
 
 <body>
@@ -44,13 +36,12 @@
                 </a>
             </h1>
             <div>
-                <ul class="navbar-nav list-unstyled components mb-5 ">
+                <ul class="navbar-nav list-unstyled components mb-5">
                     @php
                         $currentRouteName = Route::currentRouteName();
                     @endphp
-                    <li class="nav-item ">
-                        <a href="{{ route('kpi.index') }}"
-                            class="nav-link @if ($currentRouteName == 'kpi.index') active @endif">
+                    <li class="sidebar-item @if ($currentRouteName == 'kpi.index') active @endif">
+                        <a href="{{ route('kpi.index') }}" class="nav-link">
                             <span class="fa fa-home mr-2"></span>
                             Home
                         </a>
@@ -61,152 +52,110 @@
                             auth()->user()->hak == 8 ||
                             auth()->user()->hak == 9 ||
                             auth()->user()->hak == 10)
-                        {{-- <li>
-                        <a href=""><span class="fa fa-users mr-2"></span>Daftar
-                            Karyawan</a>
-                    </li> --}}
-                        <ul>
-                            <li>
-                                <a href="#">Item 1</a>
-                                <ul class="dropdown">
-                                    <li><a href="#">Subitem 1</a></li>
-                                    <li><a href="#">Subitem 2</a></li>
-                                    <li><a href="#">Subitem 3</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Item 2</a>
-                                <!-- Add more items with dropdowns as needed -->
-                            </li>
-                        </ul>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link" data-bs-toggle="collapse" data-bs-target="#master"
+                                aria-expanded="false" aria-controls="aumasterth" onclick="toggleMaster()">
+                                <i class="fa fa-gear pe-2"></i>
+                                Master Data
+                            </a>
+                            <ul id="master" class="sidebar-dropdown list-unstyled collapse"
+                                data-bs-parent="#sidebar">
+                                <li class="sidebar-item">
+                                    <a href="" class="nav-link master-karyawan-link" onclick="toggleKaryawan()"
+                                        data-bs-target="#karyawan" data-bs-toggle="collapse" aria-expanded="false"
+                                        aria-controls="aumasterth">
+                                        <span class="fa fa-users mr-2"></span> Master Karyawan
+                                    </a>
+                                    <!-- Submenu items for "Master Karyawan" -->
+                                    <ul id="karyawan" class="sidebar-dropdown list-unstyled collapse"
+                                        data-bs-parent="#master">
+                                        <li class="sidebar-item @if ($currentRouteName == 'user.index') active @endif">
+                                            <a href="{{ route('user.index') }}" class="nav-link">
+                                                <span class="fa fa-user mr-2"></span> Karyawan Aktif
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item @if ($currentRouteName == 'user.inactive') active @endif">
+                                            <a href="{{ route('user.inactive') }}" class="nav-link">
+                                                <span class="fa fa-user mr-2"></span> Karyawan Tidak Aktif
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
 
-                        <li class="nav-item">
-                            <a href="{{ route('cabang.index') }} "
-                                class="nav-link @if ($currentRouteName == 'cabang.index')  @endif">
-                                <span class="fa fa-gear mr-2"></span>
-                                Master Cabang
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('departement.index') }} "
-                                class="nav-link @if ($currentRouteName == 'departement.index')  @endif">
-                                <span class="fa fa-gear mr-2"></span>Master Departement
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('jab.index') }} "
-                                class="nav-link @if ($currentRouteName == 'jab.index')  @endif">
-                                <span class="fa fa-gear mr-2"></span>Master Jabatan
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('pen2.index') }} "
-                                class="nav-link @if ($currentRouteName == 'pen2.index')  @endif">
-                                <span class="fa fa-gear mr-2"></span>Master Penilai 2
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('pen3.index') }} "
-                                class="nav-link @if ($currentRouteName == 'pen3.index')  @endif">
-                                <span class="fa fa-gear mr-2"></span>Master Penilai 3
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('pen4.index') }} "
-                                class="nav-link @if ($currentRouteName == 'pen4.index')  @endif">
-                                <span class="fa fa-gear mr-2"></span>Master Penilai 4
-                            </a>
+                                <li class="sidebar-item @if ($currentRouteName == 'cabang.index') active @endif">
+                                    <a href="{{ route('cabang.index') }}" class="nav-link">
+                                        <span class="fa fa-industry mr-2"></span> Master Cabang
+                                    </a>
+                                </li>
+                                <li class="sidebar-item @if ($currentRouteName == 'departement.index') active @endif">
+                                    <a href="{{ route('departement.index') }}" class="nav-link">
+                                        <span class="fa fa-industry mr-2"></span> Master Departement
+                                    </a>
+                                </li>
+                                <li class="sidebar-item @if ($currentRouteName == 'jab.index') active @endif">
+                                    <a href="{{ route('jab.index') }}" class="nav-link">
+                                        <span class="fa fa-industry mr-2"></span> Master Jabatan
+                                    </a>
+                                </li>
+                                <li class="sidebar-item @if ($currentRouteName == 'pen2.index') active @endif">
+                                    <a href="{{ route('pen2.index') }}" class="nav-link">
+                                        <span class="fa fa-industry mr-2"></span> Master Penilai 2
+                                    </a>
+                                </li>
+                                <li class="sidebar-item @if ($currentRouteName == 'pen3.index') active @endif">
+                                    <a href="{{ route('pen3.index') }}" class="nav-link">
+                                        <span class="fa fa-industry mr-2"></span> Master Penilai 3
+                                    </a>
+                                </li>
+                                <li class="sidebar-item @if ($currentRouteName == 'pen4.index') active @endif">
+                                    <a href="{{ route('pen4.index') }}" class="nav-link">
+                                        <span class="fa fa-industry mr-2"></span> Master Penilai 4
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     @endif
                 </ul>
-            </div>
-            <script>
-                document.addEventListener("click", function(e) {
-                    const dropdowns = document.querySelectorAll(".dropdown");
-                    dropdowns.forEach((dropdown) => {
-                        if (!dropdown.contains(e.target)) {
-                            dropdown.style.display = "none";
-                        }
-                    });
-                });
-            </script>
-            <style>
-                /* Hide the dropdown by default */
-                .dropdown {
-                    display: none;
-                }
-
-                /* Style the main list items */
-                .dropdown-item {
-                    list-style: none;
-                    display: inline;
-                    margin-right: 20px;
-                    /* Add spacing between items */
-                    cursor: pointer;
-                    /* Change cursor to indicate clickability */
-                }
-
-                /* Style the main item links */
-                .dropdown-item>a {
-                    text-decoration: none;
-                    color: #333;
-                }
-
-                /* Style the dropdown items */
-                .dropdown li {
-                    background-color: #fff;
-                    display: block;
-                    margin-right: 10px;
-                    /* Add spacing between sub-items */
-                }
-
-                /* Style the dropdown menu when it's open */
-                .open .dropdown {
-                    display: block;
-                    position: absolute;
-                }
-            </style>
-            <script>
-                // Get all dropdown items
-                const dropdownItems = document.querySelectorAll('.dropdown-item');
-
-                // Add a click event listener to each dropdown item
-                dropdownItems.forEach((item) => {
-                    item.addEventListener('click', () => {
-                        // Toggle the "open" class on the clicked item
-                        item.classList.toggle('open');
-
-                        // Close other open dropdowns
-                        dropdownItems.forEach((otherItem) => {
-                            if (otherItem !== item && otherItem.classList.contains('open')) {
-                                otherItem.classList.remove('open');
-                            }
-                        });
-                    });
-                });
-
-                // Close dropdowns when clicking outside of them
-                document.addEventListener('click', (e) => {
-                    if (!e.target.closest('.dropdown-item')) {
-                        dropdownItems.forEach((item) => {
-                            item.classList.remove('open');
-                        });
+                <script>
+                    // Function to open the "Master Data" submenu
+                    function openMasterDataSubMenu() {
+                        var submenu = document.getElementById("master");
+                        submenu.classList.add("show");
                     }
-                });
-            </script>
-
+                    // Add a class to the "Master Data" link based on the current route name
+                    @if (in_array($currentRouteName, [
+                            'user.index',
+                            'user.inactive',
+                            'cabang.index',
+                            'departement.index',
+                            'jab.index',
+                            'pen2.index',
+                            'pen3.index',
+                            'pen4.index',
+                        ]))
+                        openMasterDataSubMenu();
+                    @endif
+                    function openKaryawanDataSubMenu() {
+                        var submenu = document.getElementById("karyawan");
+                        submenu.classList.add("show");
+                    }
+                    // Add a class to the "karyawan Data" link based on the current route name
+                    @if (in_array($currentRouteName, ['user.index', 'user.inactive']))
+                        openKaryawanDataSubMenu();
+                    @endif
+                </script>
+                </ul>
+            </div>
         </nav>
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5 pt-5">
             @yield('content')
-            @vite('resources/js/multiselect-dropdown.js')
             @vite('resources/js/main.js')
             @vite('resources/js/app.js')
-
+            @include('sweetalert::alert')
             @stack('scripts')
         </div>
     </div>
-
 </body>
 
 </html>
