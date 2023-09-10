@@ -46,6 +46,18 @@
                             Home
                         </a>
                     </li>
+                    <li class="sidebar-item  ">
+                        <a href="" class="nav-link">
+                            <span class="fa fa-gear mr-2"></span>
+                            Input KPI
+                        </a>
+                    </li>
+                    <li class="sidebar-item  ">
+                        <a href="" class="nav-link">
+                            <span class="fa fa-gear mr-2"></span>
+                            Input KPI Atasan
+                        </a>
+                    </li>
                     @if (auth()->user()->hak == 5 ||
                             auth()->user()->hak == 6 ||
                             auth()->user()->hak == 7 ||
@@ -61,9 +73,9 @@
                             <ul id="master" class="sidebar-dropdown list-unstyled collapse"
                                 data-bs-parent="#sidebar">
                                 <li class="sidebar-item">
-                                    <a href="" class="nav-link master-karyawan-link" onclick="toggleKaryawan()"
-                                        data-bs-target="#karyawan" data-bs-toggle="collapse" aria-expanded="false"
-                                        aria-controls="aumasterth">
+                                    <a href="{{ route('user.index') }}" class="nav-link master-karyawan-link"
+                                        onclick="toggleKaryawan()" data-bs-target="#karyawan" data-bs-toggle="collapse"
+                                        aria-expanded="false" aria-controls="aumasterth">
                                         <span class="fa fa-users mr-2"></span> Master Karyawan
                                     </a>
                                     <!-- Submenu items for "Master Karyawan" -->

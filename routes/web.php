@@ -42,6 +42,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('pen2', Penilai2Controller::class);
     Route::resource('pen3', Penilai3Controller::class);
     Route::resource('pen4', Penilai4Controller::class);
+    Route::get('/user/change-password',  [UserController::class, 'showChangePassword'])->name('user.change-password');
+    Route::post('/user/change-password',  [UserController::class, 'changePassword']);
 });
 
 // Routes for authentication (Login, Logout, etc.)

@@ -43,9 +43,15 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input class="form-control @error('password')is-invalid @enderror" type="password"
-                                name="password" id="password" placeholder="Masukkan password"
-                                value="{{ $errors->any() ? old('password') : $users->password }}">
+                            <div class="input-group">
+                                <input class="form-control @error('password') is-invalid @enderror custom-placeholder"
+                                    type="password" name="password" id="password"
+                                    value="{{ $errors->any() ? old('password') : $users->password }}"
+                                    placeholder="Masukkan password">
+                                <button class="btn btn-outline-secondary" type="button" id="password-toggle-btn">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </button>
+                            </div>
                             @error('password')
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                             @enderror
@@ -313,6 +319,23 @@
                     $(this).val(
                         "{{ old('tgl_masuk', \Carbon\Carbon::parse($users->tgl_masuk)->format('d/m/Y')) }}"
                     );
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var passwordField = document.getElementById("password");
+            var passwordToggleBtn = document.getElementById("password-toggle-btn");
+
+            passwordToggleBtn.addEventListener("click", function() {
+                if (passwordField.type === "password") {
+                    passwordField.type = "text";
+                    passwordToggleBtn.innerHTML =
+                        '<i class="fa fa-eye-slash" aria-hidden="true"></i>';
+                } else {
+                    passwordField.type = "password";
+                    passwordToggleBtn.innerHTML = '<i class="fa fa-eye" aria-hidden="true"></i>';
                 }
             });
         });

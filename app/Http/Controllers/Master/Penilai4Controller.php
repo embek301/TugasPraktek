@@ -64,6 +64,9 @@ class Penilai4Controller extends Controller
     public function edit(string $id)
     {
         $pageTitle = 'Edit Penilai-4';
+        if ($id == 1) {
+            return redirect()->route('pen4.index');
+        }
         $penilai4 = Penilai4::find($id);
         return view('content.KPI.Master.penilai.Penilai4.edit', compact('pageTitle', 'penilai4'));
     }

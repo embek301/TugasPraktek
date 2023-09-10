@@ -38,6 +38,7 @@ class Penilai3Controller extends Controller
     {
         $pageTitle = 'Input Data Penilai-3';
         $pen3 = Penilai3::all();
+
         return view('content.KPI.Master.Penilai.Penilai3.create', compact('pageTitle', 'pen3'));
     }
 
@@ -65,6 +66,9 @@ class Penilai3Controller extends Controller
     {
         $pageTitle = 'Edit Penilai-3';
         $penilai3 = Penilai3::find($id);
+        if ($id == 1) {
+            return redirect()->route('pen3.index');
+        }
         return view('content.KPI.Master.penilai.Penilai3.edit', compact('pageTitle', 'penilai3'));
     }
 

@@ -62,6 +62,7 @@
                         icon: "warning",
                         showCancelButton: true,
                         confirmButtonColor: '#d33',
+                        cancelButtonText: "Tidak, Batal",
                         // cancelButtonColor: '#d33',
                         confirmButtonText: "Iya, Hapus!",
                     }).then((result) => {

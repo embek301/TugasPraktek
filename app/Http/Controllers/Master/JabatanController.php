@@ -30,7 +30,7 @@ class JabatanController extends Controller
     public function index()
     {
         $pageTitle = 'Master Jabatan';
-        $jab = Jabatan::all();
+        $jab = Jabatan::orderBy('name', 'asc')->get();
         confirmDelete();
         return view('content.KPI.Master.Jabatan.index', compact('pageTitle', 'jab'));
     }
@@ -65,6 +65,9 @@ class JabatanController extends Controller
     {
         $pageTitle = 'Edit Departement';
         $jab = Jabatan::find($id);
+        if ($id == 1) {
+            return redirect()->route('jab.index');
+        }
         return view('content.KPI.Master.Jabatan.edit', compact('pageTitle', 'jab'));
     }
 

@@ -29,7 +29,6 @@
                         <th>Nama</th>
                         <th>Departemen</th>
                         <th>Cabang</th>
-
                     </tr>
                 <tbody>
                     @foreach ($users as $index => $user)

@@ -16,20 +16,22 @@ use App\Models\Penilai4;
 use App\Models\Jabatan;
 use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
 {
     public function index()
     {
-        $pageTitle = 'Master Karyawan';
+        $pageTitle = 'Karyawan Aktif';
         $users = User::where('hak', '<>', 10)->where('aktif', '<>', 0)->get();
         return view('content.KPI.Master.User.index', compact('pageTitle', 'users'));
     }
 
     public function inactive()
     {
-        $pageTitle = 'Master Karyawan';
+        $pageTitle = 'Karyawan Tidak Aktif';
         $users = User::where('hak', '<>', 10)->where('aktif', '<>', 1)->get();
         return view('content.KPI.Master.User.inactive', compact('pageTitle', 'users'));
     }
@@ -57,6 +59,7 @@ class UserController extends Controller
         $messages = [
             'required' => ':Attribute harus diisi.',
             'unique' => ':Attribute sudah ada',
+            'who.required' => 'Nama harus diisi.'
         ];
         $validator = Validator::make($request->all(), [
             'nik' => 'required|unique:users,nik',
@@ -97,6 +100,10 @@ class UserController extends Controller
     {
         $pageTitle = 'Edit User';
         $users = User::find($id);
+        if ($users && $users->hak == 10) {
+            // Redirect ke halaman user.index
+            return redirect()->route('user.index');
+        }
         $cabs = Cabang::orderBy('name', 'asc')->get();
         $depts = Dept::orderBy('name', 'asc')->get();
         $penilai2 = Penilai2::orderBy('name', 'asc')->get();
@@ -113,10 +120,15 @@ class UserController extends Controller
     {
         $messages = [
             'required' => ':Attribute harus diisi.',
-            'nik' => 'NIK sudah ada'
+            'nik' => 'NIK sudah ada',
+            'who.required' => 'Nama harus diisi.'
         ];
         $validator = Validator::make($request->all(), [
-            'nik' => 'required|unique:users,nik,' . $id // Add the ID to exclude from unique check
+            'nik' => 'required|unique:users,nik,' . $id, // Add the ID to exclude from unique check
+            'email' => 'required|unique:users,email,' . $id,
+            'who' => 'required',
+            'username' => 'required|unique:users,username,' . $id,
+            'password' => 'required',
         ], $messages);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -181,4 +193,31 @@ class UserController extends Controller
         $users->save();
         return redirect()->route('user.index')->with('success', 'User deactivated successfully');
     }
+        public function showChangePassword()
+    {
+        $pageTitle='Ganti Password';
+        return view('auth.changepassword',compact('pageTitle'));
+    }
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|confirmed',
+        ]);
+
+        // Mengambil pengguna yang saat ini login
+        $users = Auth::user();
+
+        if (Hash::check($request->current_password, $users->password)) {
+            // Memperbarui password pengguna
+            $users->update([
+                'password' => Hash::make($request->new_password),
+            ]);
+
+            return redirect()->route('home')->with('success', 'Password berhasil diubah.');
+        } else {
+            return redirect()->back()->withErrors(['current_password' => 'Password saat ini salah.']);
+        }
+    }
+
 }

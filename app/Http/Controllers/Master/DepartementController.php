@@ -66,9 +66,13 @@ class DepartementController extends Controller
 
     public function edit(string $id)
     {
+
         $pageTitle = 'Edit Departement';
         $dept = Dept::find($id);
-        Alert::success('Berhasil Diedit', 'Data Departement Berhasil Diedit');
+        if ($id == 1) {
+            return redirect()->route('departement.index');
+        }
+
         return view('content.KPI.Master.Departement.edit', compact('pageTitle', 'dept'));
     }
 
@@ -93,6 +97,7 @@ class DepartementController extends Controller
         }
         $dept->name = $request->nama_dept;
         $dept->save();
+        Alert::success('Berhasil Diedit', 'Data Departement Berhasil Diedit');
         return redirect()->route('departement.index');
     }
 

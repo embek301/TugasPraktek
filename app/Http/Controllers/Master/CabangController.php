@@ -77,6 +77,9 @@ class CabangController extends Controller
     {
         $pageTitle = 'Edit Cabang';
         $cabang = Cabang::find($id);
+        if ($id == 1) {
+            return redirect()->route('cabang.index');
+        }
         return view('content.KPI.Master.Cabang.edit', compact('pageTitle', 'cabang'));
     }
 
