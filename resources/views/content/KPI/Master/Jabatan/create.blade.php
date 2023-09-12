@@ -9,7 +9,7 @@
         }
     </style>
     <div class="container-sm mt-5">
-        <form action="{{ route('jab.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('jabatan.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row justify-content-center text-dark">
                 <div class="p-5 rounded-3 border col-xl-6" style="background-color: #d4d5d5;">
@@ -32,7 +32,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 d-grid">
-                            <a href="{{ route('jab.index') }}" class="btn btn-outline-danger btn-lg mt-3"><i
+                            <a href="{{ route('jabatan.index') }}" class="btn btn-outline-danger btn-lg mt-3"><i
                                     class="fa fa-arrow-left me-2"></i>
                                 Cancel</a>
                         </div>

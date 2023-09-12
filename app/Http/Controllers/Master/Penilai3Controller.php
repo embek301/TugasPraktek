@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Penilai3;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use App\Models\User;
 class Penilai3Controller extends Controller
 {
     /**
@@ -38,8 +38,8 @@ class Penilai3Controller extends Controller
     {
         $pageTitle = 'Input Data Penilai-3';
         $pen3 = Penilai3::all();
-
-        return view('content.KPI.Master.Penilai.Penilai3.create', compact('pageTitle', 'pen3'));
+        $user = User::where('hak', '<>', 10)->where('aktif', '<>', 0)->get();
+        return view('content.KPI.Master.Penilai.Penilai3.create', compact('pageTitle', 'pen3','user'));
     }
 
     public function store(Request $request)
@@ -60,14 +60,14 @@ class Penilai3Controller extends Controller
         $penilai3->name = $request->nama_penilai3;
         $penilai3->save();
         Alert::success('Berhasil Ditambahkan', 'Data Penilai-3 Baru Berhasil Ditambahkan');
-        return redirect()->route('pen3.index');
+        return redirect()->route('penilai3.index');
     }
     public function edit(string $id)
     {
         $pageTitle = 'Edit Penilai-3';
         $penilai3 = Penilai3::find($id);
         if ($id == 1) {
-            return redirect()->route('pen3.index');
+            return redirect()->route('penilai3.index');
         }
         return view('content.KPI.Master.penilai.Penilai3.edit', compact('pageTitle', 'penilai3'));
     }
@@ -87,12 +87,12 @@ class Penilai3Controller extends Controller
         // Find the existing cabang record to update
         $penilai3 = Penilai3::find($id);
         if (!$penilai3) {
-            return redirect()->route('pen3.index');
+            return redirect()->route('penilai3.index');
         }
         $penilai3->name = $request->nama_penilai3;
         $penilai3->save();
         Alert::success('Berhasil Diedit', 'Data Penilai-3 Baru Berhasil Diedit');
-        return redirect()->route('pen3.index');
+        return redirect()->route('penilai3.index');
     }
 
     public function destroy($id)
@@ -107,6 +107,6 @@ class Penilai3Controller extends Controller
             $penilai3->save();
         }
         Alert::success('Berhasil Dihapus', 'Data Penilai-3 Berhasil Dihapus');
-        return redirect()->route('pen3.index');
+        return redirect()->route('penilai3.index');
     }
 }

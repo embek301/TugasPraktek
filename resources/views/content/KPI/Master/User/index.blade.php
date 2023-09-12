@@ -20,6 +20,12 @@
                 </a>
             </li>
         </ul>
+        <button id="toggleActive" class="btn btn-gold">
+            <a href="{{ route('user.inactive') }}" class="text-light">
+                <i id="toggleIcon" class="fa fa-toggle-on me-1"></i>
+                <span id="toggleText">Karyawan Aktif</span>
+            </a>
+        </button>
         <div class="table-responsive border p-3 rounded-3 bg-dark text-light">
             <table class="table table-bordered table-hover mb-0 datatable" id="employeeTable">
                 <thead>
@@ -29,10 +35,12 @@
                         <th>Nama</th>
                         <th>Departemen</th>
                         <th>Cabang</th>
+                        <th>jabatan</th>
                     </tr>
+                </thead>
                 <tbody>
                     @foreach ($users as $index => $user)
-                        <tr>
+                        <tr data-aktif="{{ $user->aktif }}">
                             <td align="center">{{ $index + 1 }}</td>
                             <td><a href="{{ route('user.edit', $user->id) }}">{{ $user->nik }}</a></td>
                             <td>{{ $user->who }}</td>
@@ -48,20 +56,39 @@
                                     {{ $user->cabs->name }}
                                 @endif
                             </td>
-
+                            <td>
+                                @if ($user->jabatan == null)
+                                @else
+                                    {{ $user->jabatans->name }}
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
-                </thead>
-
             </table>
         </div>
     @endif
-    @push('scripts')
-        <script type="module">
-            $(document).ready(function() {
-                $('#employeeTable').DataTable();
-            });
-        </script>
-    @endpush
 @endsection
+@push('scripts')
+    <script type="module">
+        $(document).ready(function() {
+            $('#employeeTable').DataTable();
+        });
+        $(document).ready(function() {
+            const button = $('#toggleActive');
+            const toggleIcon = $('#toggleIcon');
+            const toggleText = $('#toggleText');
+
+            button.hover(
+                function() { // Mouseenter event
+                    toggleIcon.removeClass('fa-toggle-on').addClass('fa-toggle-off');
+                    toggleText.text('Karyawan Tidak Aktif');
+                },
+                function() { // Mouseleave event
+                    toggleIcon.removeClass('fa-toggle-off').addClass('fa-toggle-on');
+                    toggleText.text('Karyawan Aktif');
+                }
+            );
+        });
+    </script>
+@endpush

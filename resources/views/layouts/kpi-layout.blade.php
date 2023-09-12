@@ -46,24 +46,7 @@
                             Home
                         </a>
                     </li>
-                    <li class="sidebar-item  ">
-                        <a href="" class="nav-link">
-                            <span class="fa fa-gear mr-2"></span>
-                            Input KPI
-                        </a>
-                    </li>
-                    <li class="sidebar-item  ">
-                        <a href="" class="nav-link">
-                            <span class="fa fa-gear mr-2"></span>
-                            Input KPI Atasan
-                        </a>
-                    </li>
-                    @if (auth()->user()->hak == 5 ||
-                            auth()->user()->hak == 6 ||
-                            auth()->user()->hak == 7 ||
-                            auth()->user()->hak == 8 ||
-                            auth()->user()->hak == 9 ||
-                            auth()->user()->hak == 10)
+                    @if (auth()->user()->hak == 10)
                         <li class="sidebar-item">
                             <a href="#" class="sidebar-link" data-bs-toggle="collapse" data-bs-target="#master"
                                 aria-expanded="false" aria-controls="aumasterth" onclick="toggleMaster()">
@@ -72,28 +55,11 @@
                             </a>
                             <ul id="master" class="sidebar-dropdown list-unstyled collapse"
                                 data-bs-parent="#sidebar">
-                                <li class="sidebar-item">
-                                    <a href="{{ route('user.index') }}" class="nav-link master-karyawan-link"
-                                        onclick="toggleKaryawan()" data-bs-target="#karyawan" data-bs-toggle="collapse"
-                                        aria-expanded="false" aria-controls="aumasterth">
+                                <li class="sidebar-item @if ($currentRouteName == 'user.index') active @endif">
+                                    <a href="{{ route('user.index') }}" class="nav-link">
                                         <span class="fa fa-users mr-2"></span> Master Karyawan
                                     </a>
-                                    <!-- Submenu items for "Master Karyawan" -->
-                                    <ul id="karyawan" class="sidebar-dropdown list-unstyled collapse"
-                                        data-bs-parent="#master">
-                                        <li class="sidebar-item @if ($currentRouteName == 'user.index') active @endif">
-                                            <a href="{{ route('user.index') }}" class="nav-link">
-                                                <span class="fa fa-user mr-2"></span> Karyawan Aktif
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-item @if ($currentRouteName == 'user.inactive') active @endif">
-                                            <a href="{{ route('user.inactive') }}" class="nav-link">
-                                                <span class="fa fa-user mr-2"></span> Karyawan Tidak Aktif
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
-
                                 <li class="sidebar-item @if ($currentRouteName == 'cabang.index') active @endif">
                                     <a href="{{ route('cabang.index') }}" class="nav-link">
                                         <span class="fa fa-industry mr-2"></span> Master Cabang
@@ -104,29 +70,41 @@
                                         <span class="fa fa-industry mr-2"></span> Master Departement
                                     </a>
                                 </li>
-                                <li class="sidebar-item @if ($currentRouteName == 'jab.index') active @endif">
-                                    <a href="{{ route('jab.index') }}" class="nav-link">
+                                <li class="sidebar-item @if ($currentRouteName == 'jabatan.index') active @endif">
+                                    <a href="{{ route('jabatan.index') }}" class="nav-link">
                                         <span class="fa fa-industry mr-2"></span> Master Jabatan
                                     </a>
                                 </li>
-                                <li class="sidebar-item @if ($currentRouteName == 'pen2.index') active @endif">
-                                    <a href="{{ route('pen2.index') }}" class="nav-link">
+                                <li class="sidebar-item @if ($currentRouteName == 'penilai2.index') active @endif">
+                                    <a href="{{ route('penilai2.index') }}" class="nav-link">
                                         <span class="fa fa-industry mr-2"></span> Master Penilai 2
                                     </a>
                                 </li>
-                                <li class="sidebar-item @if ($currentRouteName == 'pen3.index') active @endif">
-                                    <a href="{{ route('pen3.index') }}" class="nav-link">
+                                <li class="sidebar-item @if ($currentRouteName == 'penilai3.index') active @endif">
+                                    <a href="{{ route('penilai3.index') }}" class="nav-link">
                                         <span class="fa fa-industry mr-2"></span> Master Penilai 3
                                     </a>
                                 </li>
-                                <li class="sidebar-item @if ($currentRouteName == 'pen4.index') active @endif">
-                                    <a href="{{ route('pen4.index') }}" class="nav-link">
+                                <li class="sidebar-item @if ($currentRouteName == 'penilai4.index') active @endif">
+                                    <a href="{{ route('penilai4.index') }}" class="nav-link">
                                         <span class="fa fa-industry mr-2"></span> Master Penilai 4
                                     </a>
                                 </li>
                             </ul>
                         </li>
                     @endif
+                    <li class="sidebar-item">
+                        <a href="" class="nav-link">
+                            <span class="fa fa-gear mr-2"></span>
+                            Input KPI
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="" class="nav-link">
+                            <span class="fa fa-gear mr-2"></span>
+                            Input KPI Atasan
+                        </a>
+                    </li>
                 </ul>
                 <script>
                     // Function to open the "Master Data" submenu
@@ -140,20 +118,12 @@
                             'user.inactive',
                             'cabang.index',
                             'departement.index',
-                            'jab.index',
-                            'pen2.index',
-                            'pen3.index',
-                            'pen4.index',
+                            'jabatan.index',
+                            'penilai2.index',
+                            'penilai3.index',
+                            'penilai4.index',
                         ]))
                         openMasterDataSubMenu();
-                    @endif
-                    function openKaryawanDataSubMenu() {
-                        var submenu = document.getElementById("karyawan");
-                        submenu.classList.add("show");
-                    }
-                    // Add a class to the "karyawan Data" link based on the current route name
-                    @if (in_array($currentRouteName, ['user.index', 'user.inactive']))
-                        openKaryawanDataSubMenu();
                     @endif
                 </script>
                 </ul>

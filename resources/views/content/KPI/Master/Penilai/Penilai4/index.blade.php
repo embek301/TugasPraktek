@@ -13,7 +13,7 @@
             auth()->user()->hak == 10)
         <ul class="list-inline mb-2 float-end">
             <li class="list-inline-item">
-                <a href="{{ route('pen4.create') }}" class="btn btn-gold">
+                <a href="{{ route('penilai4.create') }}" class="btn btn-gold">
                     <i class="fa fa-id-badge me-1"></i> Tambahkan Penilai 4
                 </a>
             </li>

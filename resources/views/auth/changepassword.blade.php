@@ -9,7 +9,7 @@
         }
     </style>
     <div class="container-sm mt-5">
-        <form action="{{ route('pen2.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row justify-content-center text-dark">
                 <div class="p-5 rounded-3 border col-xl-6" style="background-color: #d4d5d5;">

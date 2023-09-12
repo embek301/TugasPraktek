@@ -57,8 +57,9 @@ class User extends Authenticatable
 
     public function jabatans()
     {
-        return $this->belongsTo(Jabatan::class, 'jabatan', 'id');
+        return $this->belongsTo(Jabatan::class, 'jabatan','id');
     }
+
     public function penilai2s()
     {
         return $this->belongsTo(Penilai2::class, 'penilai2', 'id');

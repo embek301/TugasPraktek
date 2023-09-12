@@ -7,12 +7,7 @@
     @if (auth()->user()->hak != 10)
         <h2>Anda bukan admin</h2>
     @endif
-    @if (auth()->user()->hak == 5 ||
-            auth()->user()->hak == 6 ||
-            auth()->user()->hak == 7 ||
-            auth()->user()->hak == 8 ||
-            auth()->user()->hak == 9 ||
-            auth()->user()->hak == 10)
+    @if (auth()->user()->hak == 10)
         <h2>Anda Admin</h2>
     @endif
 @endsection

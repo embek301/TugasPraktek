@@ -27,39 +27,56 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="nama_admin" class="form-label">Nama Admin Unit</label>
-                            <input class="form-control @error('nama_admin')is-invalid @enderror" type="text"
-                                name="nama_admin" id="nama_admin"
-                                value="{{ $errors->any() ? old('nama_admin') : $cabang->admin_unit }}"
-                                placeholder="Masukkan Nama Admin" oninput="this.value = this.value.toUpperCase()">
+                            <select name="nama_admin" id="nama_admin" class="form-select">
+                                @foreach ($user->where('jabatan', '13') as $admin)
+                                    <option value="{{ $admin->who }}"
+                                        {{ old('nama_admin', $cabang->admin) == $admin->who ? 'selected' : '' }}>
+                                        {{ $admin->who }}
+                                    </option>
+                                @endforeach
+                            </select>
                             @error('nama_admin')
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="nama_pic" class="form-label">Nama PIC</label>
-                            <input class="form-control @error('nama_pic')is-invalid @enderror" type="text"
-                                name="nama_pic" id="nama_pic" value="{{ $errors->any() ? old('nama_pic') : $cabang->pic }}"
-                                placeholder="Masukkan Nama PIC" oninput="this.value = this.value.toUpperCase()">
-                            @error('nama_pic')
+                            <select name="nama_pic" id="nama_pic" class="form-select">
+                                @foreach ($user->where('jabatan', '8') as $pic)
+                                    <option value="{{ $pic->who }}"
+                                        {{ old('nama_pic', $cabang->pic) == $pic->who ? 'selected' : '' }}>
+                                        {{ $pic->who }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('nama_head')
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="nama_head" class="form-label">Nama Head</label>
-                            <input class="form-control @error('nama_head')is-invalid @enderror" type="text"
-                                name="nama_head" id="nama_head"
-                                value="{{ $errors->any() ? old('nama_nama_head') : $cabang->head }}"
-                                placeholder="Masukkan Nama Head"oninput="this.value = this.value.toUpperCase()">
+                            <select name="nama_head" id="nama_head" class="form-select">
+                                @foreach ($user->where('jabatan', '21') as $head)
+                                    <option value="{{ $head->who }}"
+                                        {{ old('nama_head', $cabang->head) == $head->who ? 'selected' : '' }}>
+                                        {{ $head->who }}
+                                    </option>
+                                @endforeach
+                            </select>
                             @error('nama_head')
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="nama_kabeng" class="form-label">Nama Kabeng</label>
-                            <input class="form-control @error('nama_kabeng')is-invalid @enderror" type="text"
-                                name="nama_kabeng" id="nama_kabeng"
-                                value="{{ $errors->any() ? old('nama_kabeng') : $cabang->kabeng }}"
-                                placeholder="Masukkan Nama Kabeng"oninput="this.value = this.value.toUpperCase()">
+                            <select name="nama_kabeng" id="nama_kabeng" class="form-select">
+                                @foreach ($user->where('jabatan', '20') as $kabeng)
+                                    <option value="{{ $kabeng->who }}"
+                                        {{ old('nama_kabeng', $cabang->kabeng) == $kabeng->who ? 'selected' : '' }}>
+                                        {{ $kabeng->who }}
+                                    </option>
+                                @endforeach
+                            </select>
                             @error('nama_kabeng')
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                             @enderror

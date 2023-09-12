@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="container-sm mt-5">
-        <form action="{{ route('pen3.update', ['pen3' => $penilai3->id]) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('penilai3.update', ['penilai3' => $penilai3->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row justify-content-center text-dark">
@@ -27,7 +27,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 d-grid">
-                                <a href="{{ route('pen3.index') }}" class="btn btn-outline-danger btn-lg mt-3"><i
+                                <a href="{{ route('penilai3.index') }}" class="btn btn-outline-danger btn-lg mt-3"><i
                                         class="fa fa-arrow-left me-2"></i>
                                     Cancel</a>
                             </div>

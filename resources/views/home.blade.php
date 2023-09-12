@@ -4,7 +4,7 @@
     <h2 class="mb-4">selamat datang {{ Auth::user()->who }}</h2>
     <div class="container">
         <div class="row">
-            <div class="col-6 col-sm-3"><a href=""><img src="{{ Vite::asset('resources/images/employee.png') }}"
+            <div class="col-6 col-sm-3"><a href="{{ route('employee-form.index') }}"><img src="{{ Vite::asset('resources/images/employee.png') }}"
                         alt="" style="width:100%"></a>
             </div>
             <div class="col-6 col-sm-3"><a href=""><img src="{{ Vite::asset('resources/images/purchasing.png') }}"

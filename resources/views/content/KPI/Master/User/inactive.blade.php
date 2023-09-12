@@ -13,6 +13,12 @@
             auth()->user()->hak == 8 ||
             auth()->user()->hak == 9 ||
             auth()->user()->hak == 10)
+        <button id="toggleInactive" class="btn btn-gold mb-2">
+            <a href="{{ route('user.index') }}" class="text-light">
+                <i id="toggleIcon" class="fa fa-toggle-on me-1"></i>
+                <span id="toggleText">Karyawan Tidak Aktif</span>
+            </a>
+        </button>
         <div class="table-responsive border p-3 rounded-3 bg-dark text-light">
             <table class="table table-bordered table-hover mb-0 datatable" id="employeeTable">
                 <thead>
@@ -54,6 +60,22 @@
             $(document).ready(function() {
                 $('#employeeTable').DataTable();
             });
+             $(document).ready(function() {
+            const button = $('#toggleInactive');
+            const toggleIcon = $('#toggleIcon');
+            const toggleText = $('#toggleText');
+
+            button.hover(
+                function() { // Mouseenter event
+                    toggleIcon.removeClass('fa-toggle-on').addClass('fa-toggle-off');
+                    toggleText.text('Karyawan Aktif');
+                },
+                function() { // Mouseleave event
+                    toggleIcon.removeClass('fa-toggle-off').addClass('fa-toggle-on');
+                    toggleText.text('Karyawan Tidak Aktif');
+                }
+            );
+        });
         </script>
     @endpush
 @endsection

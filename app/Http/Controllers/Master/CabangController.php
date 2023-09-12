@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Cabang;
+use App\Models\User;
 
 
 
@@ -44,8 +45,9 @@ class CabangController extends Controller
     public function create()
     {
         $pageTitle = 'Input Data Cabang';
+        $user = User::where('hak', '<>', 10)->where('aktif', '<>', 0)->get();
         $cabang = Cabang::all();
-        return view('content.KPI.Master.Cabang.Create', compact('pageTitle', 'cabang'));
+        return view('content.KPI.Master.Cabang.Create', compact('pageTitle', 'cabang','user'));
     }
 
 
@@ -80,7 +82,8 @@ class CabangController extends Controller
         if ($id == 1) {
             return redirect()->route('cabang.index');
         }
-        return view('content.KPI.Master.Cabang.edit', compact('pageTitle', 'cabang'));
+        $user = User::where('hak', '<>', 10)->where('aktif', '<>', 0)->get();
+        return view('content.KPI.Master.Cabang.edit', compact('pageTitle', 'cabang','user'));
     }
 
     public function update(Request $request, string $id)

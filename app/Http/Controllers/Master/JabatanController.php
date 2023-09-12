@@ -59,14 +59,14 @@ class JabatanController extends Controller
         $jab->name = $request->nama_jab;
         $jab->save();
         Alert::success('Berhasil Ditambahkan', 'Data Jabatan Berhasil Ditambahkan');
-        return redirect()->route('jab.index');
+        return redirect()->route('jabatan.index');
     }
     public function edit(string $id)
     {
         $pageTitle = 'Edit Departement';
         $jab = Jabatan::find($id);
         if ($id == 1) {
-            return redirect()->route('jab.index');
+            return redirect()->route('jabatan.index');
         }
         return view('content.KPI.Master.Jabatan.edit', compact('pageTitle', 'jab'));
     }
@@ -86,12 +86,12 @@ class JabatanController extends Controller
         // Find the existing cabang record to update
         $jab = Jabatan::find($id);
         if (!$jab) {
-            return redirect()->route('jab.index');
+            return redirect()->route('jabatan.index');
         }
         $jab->name = $request->nama_jab;
         $jab->save();
         Alert::success('Berhasil Diedit', 'Data Jabatan Berhasil Diedit');
-        return redirect()->route('jab.index');
+        return redirect()->route('jabatan.index');
     }
 
     public function destroy($id)
@@ -106,6 +106,6 @@ class JabatanController extends Controller
             $jab->save();
         }
         Alert::success('Berhasil Dihapus', 'Data Jabatan Berhasil Dihapus');
-        return redirect()->route('jab.index');
+        return redirect()->route('jabatan.index');
     }
 }

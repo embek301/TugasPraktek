@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Master;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Penilai4;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -38,7 +39,8 @@ class Penilai4Controller extends Controller
     {
         $pageTitle = 'Input Data Penilai-4';
         $pen4 = Penilai4::all();
-        return view('content.KPI.Master.Penilai.Penilai4.create', compact('pageTitle', 'pen4'));
+        $user = User::where('hak', '<>', 10)->where('aktif', '<>', 0)->get();
+        return view('content.KPI.Master.Penilai.Penilai4.create', compact('pageTitle', 'pen4', 'user'));
     }
 
     public function store(Request $request)
@@ -59,13 +61,13 @@ class Penilai4Controller extends Controller
         $penilai4->name = $request->nama_penilai4;
         $penilai4->save();
         Alert::success('Penilai-4 Ditambahkan', 'Data Penilai-4 Baru Berhasil Ditambahkan');
-        return redirect()->route('pen4.index');
+        return redirect()->route('penilai4.index');
     }
     public function edit(string $id)
     {
         $pageTitle = 'Edit Penilai-4';
         if ($id == 1) {
-            return redirect()->route('pen4.index');
+            return redirect()->route('penilai4.index');
         }
         $penilai4 = Penilai4::find($id);
         return view('content.KPI.Master.penilai.Penilai4.edit', compact('pageTitle', 'penilai4'));
@@ -86,12 +88,12 @@ class Penilai4Controller extends Controller
         // Find the existing cabang record to update
         $penilai4 = Penilai4::find($id);
         if (!$penilai4) {
-            return redirect()->route('pen4.index');
+            return redirect()->route('penilai4.index');
         }
         $penilai4->name = $request->nama_penilai4;
         $penilai4->save();
         Alert::success('Penilai-4 Diedit', 'Data Penilai-4 Baru Berhasil Diedit');
-        return redirect()->route('pen4.index');
+        return redirect()->route('penilai4.index');
     }
 
     public function destroy($id)
@@ -106,6 +108,6 @@ class Penilai4Controller extends Controller
             $penilai4->save();
         }
         Alert::success('Penilai-4 Dihapus', 'Data Penilai-4 Berhasil Dihapus');
-        return redirect()->route('pen4.index');
+        return redirect()->route('penilai4.index');
     }
 }

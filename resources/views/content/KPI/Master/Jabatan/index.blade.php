@@ -12,7 +12,7 @@
             auth()->user()->hak == 10)
         <ul class="list-inline mb-2 float-end">
             <li class="list-inline-item">
-                <a href="{{ route('jab.create') }}" class="btn btn-gold">
+                <a href="{{ route('jabatan.create') }}" class="btn btn-gold">
                     <i class="fa fa-id-badge me-1"></i> Tambahkan Jabatan
                 </a>
             </li>

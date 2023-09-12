@@ -31,7 +31,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="who" class="form-label">Nama</label>
                             <input class="form-control @error('who')is-invalid  @enderror custom-placeholder" type="text"
-                                name="who" id="who" value="{{ old('who') }}" placeholder="Masukkan Nama">
+                                name="who" id="who" value="{{ old('who') }}" placeholder="Masukkan Nama"  oninput="this.value = this.value.toUpperCase()">
                             @error('who')
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                             @enderror
@@ -40,7 +40,7 @@
                             <label for="username" class="form-label">Username</label>
                             <input class="form-control @error('username') is-invalid  @enderror custom-placeholder"
                                 type="text" name="username" id="username" value="{{ old('username') }}"
-                                placeholder="Masukkan username ">
+                                placeholder="Masukkan username " readonly>
                             @error('username')
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                             @enderror
@@ -102,7 +102,6 @@
                         <div class="col-md-6 mb-3">
                             <label for="cabang" class="form-label">Cabang</label>
                             <select name="cabang" id="cabang" class="form-select">
-
                                 @foreach ($cabs as $cabang)
                                     <option value="{{ $cabang->id }}"
                                         {{ old('cabang') == $cabang->id ? 'selected' : '' }}>
@@ -243,4 +242,14 @@
             });
         });
     </script>
+    <script>
+    // Add an event listener to the NIK input field
+    document.getElementById('nik').addEventListener('input', function() {
+        // Get the value from the NIK input
+        var nikValue = this.value;
+
+        // Update the value of the Username input with the NIK value
+        document.getElementById('username').value = nikValue;
+    });
+</script>
 @endsection

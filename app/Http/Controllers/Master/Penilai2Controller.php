@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Master;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\penilai2;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -38,8 +39,8 @@ class penilai2Controller extends Controller
     {
         $pageTitle = 'Input Data Penilai-2';
         $pen2 = penilai2::all();
-
-        return view('content.KPI.Master.Penilai.penilai2.create', compact('pageTitle', 'pen2'));
+        $user = User::where('hak', '<>', 10)->where('aktif', '<>', 0)->get();
+        return view('content.KPI.Master.Penilai.penilai2.create', compact('pageTitle', 'pen2', 'user'));
     }
 
     public function store(Request $request)
@@ -57,17 +58,17 @@ class penilai2Controller extends Controller
         $penilai2 = new penilai2;
         $maxId = penilai2::max('id');
         $penilai2->id = $maxId + 1;
-        $penilai2->name = $request->nama_penilai2;
+        $penilai2->name = $request->input('nama_penilai2');
         $penilai2->save();
         Alert::success('Berhasil Ditambahkan', 'Data Penilai-2 Baru Berhasil Ditambahkan');
-        return redirect()->route('pen2.index');
+        return redirect()->route('penilai2.index');
     }
     public function edit(string $id)
     {
         $pageTitle = 'Edit Penilai-2';
         $penilai2 = penilai2::find($id);
         if ($id == 1) {
-            return redirect()->route('pen2.index');
+            return redirect()->route('penilai2.index');
         }
         return view('content.KPI.Master.penilai.penilai2.edit', compact('pageTitle', 'penilai2'));
     }
@@ -87,12 +88,12 @@ class penilai2Controller extends Controller
         // Find the existing cabang record to update
         $penilai2 = penilai2::find($id);
         if (!$penilai2) {
-            return redirect()->route('pen2.index');
+            return redirect()->route('penilai2.index');
         }
         $penilai2->name = $request->nama_penilai2;
         $penilai2->save();
         Alert::success('Berhasil Diedit', 'Data Penilai-2 Baru Berhasil Diedit');
-        return redirect()->route('pen2.index');
+        return redirect()->route('penilai2.index');
     }
 
     public function destroy($id)
@@ -107,6 +108,6 @@ class penilai2Controller extends Controller
             $penilai2->save();
         }
         Alert::success('Berhasil Dihapus', 'Data Penilai-2 Berhasil Dihapus');
-        return redirect()->route('pen2.index');
+        return redirect()->route('penilai2.index');
     }
 }

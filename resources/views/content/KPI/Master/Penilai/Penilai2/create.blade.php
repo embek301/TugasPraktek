@@ -9,7 +9,7 @@
         }
     </style>
     <div class="container-sm mt-5">
-        <form action="{{ route('pen2.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('penilai2.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row justify-content-center text-dark">
                 <div class="p-5 rounded-3 border col-xl-6" style="background-color: #d4d5d5;">
@@ -22,17 +22,18 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label for="nama_penilai2" class="form-label">Nama Penilai 2</label>
-                            <input class="form-control @error('nama_penilai2')is-invalid @enderror custom-placeholder"
-                                type="text" name="nama_penilai2" id="nama_penilai2" value="{{ old('nama_penilai2') }}"
-                                placeholder="Masukkan Nama " oninput="this.value = this.value.toUpperCase()">
-                            @error('nama_penilai2')
-                                <div class="text-danger"><small>{{ $message }}</small></div>
-                            @enderror
+                             <select name="nama_penilai2" id="nama_penilai2" class="form-select">
+                                @foreach ($user as $nama_penilai2)
+                                    <option value="{{ $nama_penilai2->who }}"
+                                        {{ old('nama_penilai2') == $nama_penilai2->id ? 'selected' : '' }}>
+                                        {{ $nama_penilai2->who }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 d-grid">
-                            <a href="{{ route('pen2.index') }}" class="btn btn-outline-danger btn-lg mt-3"><i
+                            <a href="{{ route('penilai2.index') }}" class="btn btn-outline-danger btn-lg mt-3"><i
                                     class="fa fa-arrow-left me-2"></i>
                                 Cancel</a>
                         </div>
