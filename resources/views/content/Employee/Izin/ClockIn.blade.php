@@ -1,15 +1,8 @@
 @extends('layouts.employee-layout')
 @section('content')
-    <style>
-        /* Define a custom CSS class to style the placeholder color */
-        .custom-placeholder::placeholder {
-            color: #a7a4a4;
-            /* Set your desired color */
-        }
-    </style>
     <div class="container-sm mt-5">
         @if ($isWithinAllowedTime)
-            <form action="{{ route('izin-terlambat.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row justify-content-center text-dark">
                     <div class="p-5 rounded-3 border col-xl-6" style="background-color: #d4d5d5;">
@@ -21,15 +14,26 @@
                         </div>
                         <hr>
                         <div class="row">
+                            <div class="col-md-6">
+                                <label for="id_ClockIn" class="form-label">no</label>
+                                <input class="form-control" type="text" name="id_ClockIn" id="id_ClockIn"
+                                    value="{{ $idClockIn }}" readonly>
+                            </div>
                             <div class="col-md-6 mb-3">
                                 <label for="who" class="form-label">Nama</label>
                                 <input class="form-control @error('who')is-invalid @enderror" type="text" name="who"
                                     id="who" placeholder="Masukkan Nama" value="{{ auth()->user()->who }}" readonly>
+                                @error('who')
+                                    <div class="text-danger"><small>{{ $message }}</small></div>
+                                @enderror
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="nik" class="form-label">NIK</label>
                                 <input class="form-control @error('nik')is-invalid @enderror" type="text" name="nik"
                                     id="nik" placeholder="Masukkan Nama" value="{{ auth()->user()->nik }}" readonly>
+                                @error('nik')
+                                    <div class="text-danger"><small>{{ $message }}</small></div>
+                                @enderror
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="tanggal" class="form-label">Tanggal</label>
@@ -43,10 +47,13 @@
                                     type="text" name="waktu" id="waktu"
                                     value="{{ $dateInGMTPlus7->format('H:i:s') }}" readonly>
                             </div>
-                            <div class="col-md-12 mb-3">
-                                <label for="alasanTerlambat" class="form-label">Alasan Terlambat</label>
-                                <textarea class="form-control @error('alasanTerlambat') is-invalid @enderror" type="text" name="alasanTerlambat"
-                                    id="alasanTerlambat" value="{{ old('alasanTerlambat') }}" placeholder="Alasan Terlambat" style="height:100px"></textarea>
+                            <div class="col-md-6 mb-3">
+                                <label for="alasanClockIn" class="form-label">Alasan Clock In</label>
+                                <textarea class="form-control @error('alasanClockIn') is-invalid @enderror" type="text" name="alasanClockIn"
+                                    id="alasanClockIn" value="{{ old('alasanClockIn') }}" placeholder="Alasan Clock In" style="height:100px"></textarea>
+                                @error('alasanClockIn')
+                                    <div class="text-danger"><small>{{ $message }}</small></div>
+                                @enderror
                             </div>
                         </div>
                         <div class="row">
@@ -64,7 +71,7 @@
                 </div>
             </form>
         @else
-            <p class="text-danger">Izin Terlambat Tidak Bisa Diakses, Izin hanya dapat diakses pada jam 08.01 - 15.59</p>
+            <p class="text-danger">Izin Clock In Tidak Bisa Diakses, Clock In hanya dapat diakses sebelum jam 08.00 WIB</p>
         @endif
     </div>
 @endsection

@@ -30,14 +30,14 @@ class Penilai3Controller extends Controller
     public function index()
     {
         $pageTitle = 'Master Penilai-3';
-        $pen3 = Penilai3::all();
+        $pen3 = Penilai3::orderBy('name', 'asc')->get();
         confirmDelete();
         return view('content.KPI.Master.Penilai.Penilai3.index', compact('pageTitle', 'pen3'));
     }
     public function create()
     {
         $pageTitle = 'Input Data Penilai-3';
-        $pen3 = Penilai3::all();
+        $pen3 = Penilai3::orderBy('name', 'asc')->get();
         $user = User::where('hak', '<>', 10)->where('aktif', '<>', 0)->get();
         return view('content.KPI.Master.Penilai.Penilai3.create', compact('pageTitle', 'pen3','user'));
     }

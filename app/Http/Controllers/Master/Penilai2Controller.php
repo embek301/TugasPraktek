@@ -31,14 +31,14 @@ class penilai2Controller extends Controller
     public function index()
     {
         $pageTitle = 'Master Penilai-2';
-        $pen2 = penilai2::all();
+        $pen2 = penilai2::orderBy('name', 'asc')->get();
         confirmDelete();
         return view('content.KPI.Master.Penilai.penilai2.index', compact('pageTitle', 'pen2'));
     }
     public function create()
     {
         $pageTitle = 'Input Data Penilai-2';
-        $pen2 = penilai2::all();
+        $pen2 = penilai2::orderBy('name', 'asc')->get();
         $user = User::where('hak', '<>', 10)->where('aktif', '<>', 0)->get();
         return view('content.KPI.Master.Penilai.penilai2.create', compact('pageTitle', 'pen2', 'user'));
     }

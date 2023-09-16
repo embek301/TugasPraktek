@@ -80,4 +80,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Dept::class, 'gol', 'id');
     }
+    public function terlambat()
+    {
+        return $this->hasMany(Terlambat::class);
+    }
 }

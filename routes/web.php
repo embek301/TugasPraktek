@@ -13,7 +13,12 @@ use App\Http\Controllers\Master\JabatanController;
 use App\Http\Controllers\Master\Penilai2Controller;
 use App\Http\Controllers\Master\Penilai3Controller;
 use App\Http\Controllers\Master\Penilai4Controller;
-use App\Http\Controllers\Izin\IzinController;
+// use App\Http\Controllers\Izin\IzinController;
+use App\Http\Controllers\Izin\IzinTerlambat;
+use App\Http\Controllers\Izin\IzinPulangAwal;
+use App\Http\Controllers\Izin\ClockIn;
+use App\Http\Controllers\Izin\ClockOut;
+use App\Http\Controllers\Izin\IzinSakit;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +41,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user/change-password', [UserController::class, 'showChangePassword'])->name('user.change-password');
     Route::post('/user/change-password', [UserController::class, 'changePassword']);
     Route::resource('employee-form', EmployeeFormController::class)->except('show');
-    Route::resource('employee-form/izin', IzinController::class)->except('show');
+    // Route::resource('employee-form/izin', IzinController::class)->except('show');
+    Route::resource('employee-form/izin-terlambat', IzinTerlambat::class)->except('show');
+    Route::resource('employee-form/izin-pulang-awal', IzinPulangAwal::class)->except('show');
+    Route::resource('employee-form/izin-clock-in', ClockIn::class)->except('show');
+    Route::resource('employee-form/izin-clock-out', ClockOut::class)->except('show');
+    Route::resource('employee-form/izin-sakit', IzinSakit::class)->except('show');
 });
 
 Route::middleware(['isAdmin'])->group(function () {

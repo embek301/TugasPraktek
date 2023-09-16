@@ -31,14 +31,14 @@ class Penilai4Controller extends Controller
     public function index()
     {
         $pageTitle = 'Master Penilai-4';
-        $pen4 = Penilai4::all();
+        $pen4 = Penilai4::orderBy('name', 'asc')->get();
         confirmDelete();
         return view('content.KPI.Master.Penilai.Penilai4.index', compact('pageTitle', 'pen4'));
     }
     public function create()
     {
         $pageTitle = 'Input Data Penilai-4';
-        $pen4 = Penilai4::all();
+        $pen4 = Penilai4::orderBy('name', 'asc')->get();
         $user = User::where('hak', '<>', 10)->where('aktif', '<>', 0)->get();
         return view('content.KPI.Master.Penilai.Penilai4.create', compact('pageTitle', 'pen4', 'user'));
     }

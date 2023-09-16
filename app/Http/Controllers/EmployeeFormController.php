@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Terlambat;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,9 @@ class EmployeeFormController extends Controller
     {
         $pageTitle = 'Employee Form';
         $users = User::where('hak', '<>', 10)->get();
-        return view('content.Employee.dashboard', compact('pageTitle', 'users'));
+        $terlambatData=Terlambat::all();
+        // dd($terlambatData);
+        return view('content.Employee.dashboard', compact('pageTitle', 'users','terlambatData'));
     }
 
     public function create()

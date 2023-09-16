@@ -19,10 +19,11 @@
     <!-- Scripts -->
     @vite('resources/sass/app.scss')
     @vite('resources/css/home.css')
-
     <style>
-        .multiselect-dropdown {
-            width: 100% !important;
+        /* Define a custom CSS class to style the placeholder color */
+        .custom-placeholder::placeholder {
+            color: #a7a4a4;
+            /* Set your desired color */
         }
     </style>
 </head>
@@ -39,32 +40,34 @@
             <h1><a href="{{ route('home') }}" class="logo"><img
                         src="{{ Vite::asset('resources/images/asrimotor-logo.png') }}" alt=""
                         style="width: 100%"></a></h1>
-            <ul class="list-unstyled components mb-5">
-                <li>
-                    <a href="{{ route('home') }}"><span class="fa fa-home mr-3"></span> Tes</a>
-                </li>
-                {{-- <li>
-                    <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();"
-                        class="text-danger"><i class="fa fa-sign-out mr-3"></i>
-                        {{ __('Logout') }}
+            <ul class="navbar-nav list-unstyled components mb-5">
+                @php
+                    $currentRouteName = Route::currentRouteName();
+                @endphp
+                <li class="sidebar-item @if ($currentRouteName == 'employee-form.index') active @endif">
+                    <a href="{{ route('employee-form.index') }}" class="nav-link">
+                        <span class="fa fa-home mr-2"></span>
+                        Home
                     </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                </li> --}}
+                </li>
+                @include('layouts.form-employee.izin')
+                @include('layouts.form-employee.cuti')
             </ul>
         </nav>
+
 
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5 pt-5">
             @yield('content')
-
+            @vite('resources/js/main.js')
+            @vite('resources/js/app.js')
+            @include('sweetalert::alert')
+            @stack('scripts')
         </div>
     </div>
     @vite('resources/js/main.js')
     @vite('resources/js/app.js')
 </body>
+
 
 </html>
