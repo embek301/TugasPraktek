@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Terlambat;
 use App\Models\User;
+use App\Models\Penilai2;
+use App\Models\Terlambat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class EmployeeFormController extends Controller
 {
@@ -25,12 +28,28 @@ class EmployeeFormController extends Controller
      */
     public function index()
     {
-        $pageTitle = 'Employee Form';
-        $users = User::where('hak', '<>', 10)->get();
-        $terlambatData=Terlambat::all();
-        // dd($terlambatData);
-        return view('content.Employee.dashboard', compact('pageTitle', 'users','terlambatData'));
+        $pageTitle = 'List Approval Absensi';
+        $terlambatData = [];
+
+        // Get the currently logged-in user
+        $user = auth()->user();
+        dd($user);
+        // Find the Penilai 2 associated with the current user
+        $penilai2 = $user->penilai2s;
+
+        if ($penilai2) {
+            $penilai2Name = $penilai2->name;
+          
+            // Retrieve the Terlambat data for users with the same 'nama' as Penilai 2
+            $terlambatData = Terlambat::where('nama', $penilai2Name)->get();
+        }
+
+        return view('content.Employee.dashboard', compact('pageTitle', 'terlambatData'));
     }
+
+
+
+
 
     public function create()
     {

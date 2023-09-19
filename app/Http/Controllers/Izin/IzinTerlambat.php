@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Terlambat;
 use App\Models\User;
 use Carbon\Carbon;
-
+use App\Models\Penilai2;
 
 
 
@@ -39,26 +39,26 @@ class IzinTerlambat extends Controller
     public function index()
     {
         $users = User::all();
+        $penilai2Names = Penilai2::pluck('name')->toArray();
         $dateInGMTPlus7 = Carbon::now()->setTimezone('Asia/Jakarta');
         $currentHour = $dateInGMTPlus7->format('H'); // Get the current hour in 24-hour format
         $pageTitle = 'Form Izin Terlambat';
         // Check if the current hour is within the allowed time frame (08:00 - 15:59)
-        $isWithinAllowedTime = ($currentHour >= 8 && $currentHour < 16);
+        $isWithinAllowedTime = ($currentHour >= 8 && $currentHour <= 21);
 
-        return view('content.Employee.izin.terlambat', compact('pageTitle', 'users', 'dateInGMTPlus7', 'isWithinAllowedTime'));
+        return view('content.Employee.izin.terlambat', compact('pageTitle', 'users', 'dateInGMTPlus7', 'isWithinAllowedTime','penilai2Names'));
 
     }
 
 
     public function create()
     {
-
     }
     public function store(Request $request)
-    {  
+    {
         // Mendapatkan tanggal saat ini dalam format YYMM
         $dateInGMTPlus7 = now()->setTimezone('Asia/Jakarta')->format('ym');
-        
+
         // Mengambil ID terakhir dari tabel Terlambat dengan prefix dan tanggal yang sesuai
         $lastId = Terlambat::where('id_terlambat', 'like', 'ASR' . $dateInGMTPlus7 . '%')->max('id_terlambat');
 
@@ -101,7 +101,7 @@ class IzinTerlambat extends Controller
         $pageTitle = 'Approval';
         $izinTerlambat = Terlambat::where('id_terlambat', $id_terlambat)->first();
         $dateInGMTPlus7 = now()->setTimezone('Asia/Jakarta');
-        return view('content.Employee.izin.approval-1.acc', compact('pageTitle', 'izinTerlambat', 'dateInGMTPlus7','users'));
+        return view('content.Employee.izin.approval-1.acc', compact('pageTitle', 'izinTerlambat', 'dateInGMTPlus7', 'users'));
 
     }
 

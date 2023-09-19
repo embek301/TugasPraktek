@@ -13,4 +13,5 @@ class Penilai2 extends Model
     {
         return $this->hasMany(User::class);
     }
+
 }

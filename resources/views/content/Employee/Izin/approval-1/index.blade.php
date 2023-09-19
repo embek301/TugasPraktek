@@ -1,9 +1,6 @@
-@if (auth()->user()->hak == 6 ||
-        auth()->user()->hak == 7 ||
-        auth()->user()->hak == 8 ||
-        auth()->user()->hak == 9 ||
-        auth()->user()->hak == 10)
-    <div class="text-center"> <!-- Add text-center class here -->
+<!-- Check if the user is a penilai2 -->
+{{-- @if (auth()->user()->penilai2) --}}
+    <div class="text-center">
         <h1 class="mb-4">List Approval Absensi</h1>
     </div>
     <div class="table-responsive border p-3 rounded-3 bg-dark text-light">
@@ -18,16 +15,17 @@
                     <th>Jam</th>
                     <th>Alasan</th>
                     <th>Approval 1</th>
-                    <th>Tanggal aprroval 1</th>
+                    <th>Tanggal Approval 1</th>
                     <th>Status</th>
                     <th>Jenis</th>
                 </tr>
+            </thead>
             <tbody>
                 @foreach ($terlambatData as $index => $terlambat)
                     <tr>
                         <td align="center">{{ $index + 1 }}</td>
                         <td>
-                            <a href="{{route('izin-terlambat.edit', $terlambat->id_terlambat)}}">{{ $terlambat->id_terlambat }}</a>
+                            <a href="{{ route('izin-terlambat.edit', $terlambat->id_terlambat) }}">{{ $terlambat->id_terlambat }}</a>
                         </td>
                         <td>{{ $terlambat->nik }}</td>
                         <td>{{ $terlambat->nama }}</td>
@@ -41,10 +39,9 @@
                     </tr>
                 @endforeach
             </tbody>
-            </thead>
         </table>
     </div>
-@endif
+{{-- @endif --}}
 @push('scripts')
     <script type="module">
         $(document).ready(function() {
@@ -62,7 +59,6 @@
                     showCancelButton: true,
                     confirmButtonColor: '#d33',
                     cancelButtonText: "Tidak, Batal",
-                    // cancelButtonColor: '#d33',
                     confirmButtonText: "Iya, Hapus!",
                 }).then((result) => {
                     if (result.isConfirmed) {

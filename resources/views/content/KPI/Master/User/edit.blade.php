@@ -18,7 +18,7 @@
                             <label for="nik" class="form-label">NIK</label>
                             <input class="form-control @error('nik')is-invalid @enderror" type="text" name="nik"
                                 id="nik" placeholder="Masukkan NIK"
-                                value="{{ $errors->any() ? old('nik') : $users->nik }}">
+                               w value="{{ $errors->any() ? old('nik') : $users->nik }}">
                             @error('nik')
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                             @enderror

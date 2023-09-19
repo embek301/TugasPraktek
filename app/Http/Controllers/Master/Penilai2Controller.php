@@ -47,22 +47,27 @@ class penilai2Controller extends Controller
     {
         $messages = [
             'required' => ':Attribute harus diisi.',
-            'nama_penilai2' => 'Nama Penilai-2 sudah ada'
+            'unique' => 'Penilai-2 dengan nama ":input" sudah ada'
         ];
+
         $validator = Validator::make($request->all(), [
             'nama_penilai2' => 'required|unique:penilai2s,name'
         ], $messages);
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
+
         $penilai2 = new penilai2;
         $maxId = penilai2::max('id');
         $penilai2->id = $maxId + 1;
         $penilai2->name = $request->input('nama_penilai2');
         $penilai2->save();
+
         Alert::success('Berhasil Ditambahkan', 'Data Penilai-2 Baru Berhasil Ditambahkan');
         return redirect()->route('penilai2.index');
     }
+
     public function edit(string $id)
     {
         $pageTitle = 'Edit Penilai-2';

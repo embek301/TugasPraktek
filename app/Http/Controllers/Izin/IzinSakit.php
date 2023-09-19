@@ -45,7 +45,7 @@ class IzinSakit extends Controller
         $pageTitle = 'Form Izin Sakit';
 
         // Check if the current hour is within the allowed time frame (08:00 - 15:59)
-        $isWithinAllowedTime = ($currentHour >= 8 && $currentHour <= 16);
+        $isWithinAllowedTime = ($currentHour >= 8 && $currentHour <= 22);
 
         return view('content.Employee.izin.sakit', compact('pageTitle', 'users', 'dateInGMTPlus7', 'idSakit', 'isWithinAllowedTime'));
     }

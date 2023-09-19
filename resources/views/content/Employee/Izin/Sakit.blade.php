@@ -61,7 +61,6 @@
                                     <div class="text-danger"><small>{{ $message }}</small></div>
                                 @enderror
                             </div>
-
                             <script>
                                 // Mendapatkan elemen-elemen input tanggal dan pesan kesalahan
                                 var startDateInput = document.getElementById('tgl_awal');
