@@ -1,5 +1,5 @@
 <!-- Check if the user is a penilai2 -->
-{{-- @if (auth()->user()->penilai2) --}}
+@if ($isPenilai2||auth()->user()->hak == 7||auth()->user()->hak == 10)
     <div class="text-center">
         <h1 class="mb-4">List Approval Absensi</h1>
     </div>
@@ -8,15 +8,14 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>ID</th>
+                    <th>Id Absensi</th>
                     <th>NIK</th>
                     <th>Nama</th>
                     <th>Tanggal</th>
                     <th>Jam</th>
-                    <th>Alasan</th>
-                    <th>Approval 1</th>
-                    <th>Tanggal Approval 1</th>
-                    <th>Status</th>
+                    @if (auth()->user()->hak == 7||auth()->user()->hak == 10)
+                        <th>Approval1</th>
+                    @endif
                     <th>Jenis</th>
                 </tr>
             </thead>
@@ -31,17 +30,16 @@
                         <td>{{ $terlambat->nama }}</td>
                         <td>{{ date('Y-m-d', strtotime($terlambat->tanggal)) }}</td>
                         <td>{{ $terlambat->jam }}</td>
-                        <td>{{ $terlambat->alasan }}</td>
-                        <td>{{ $terlambat->aprroval1 }}</td>
-                        <td>{{ $terlambat->tgl_app1 }}</td>
-                        <td>{{ $terlambat->status }}</td>
+                        @if (auth()->user()->hak == 7||auth()->user()->hak == 10)
+                            <td>{{ $terlambat->approval1 }}</td>
+                        @endif
                         <td>{{ $terlambat->jenis }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-{{-- @endif --}}
+@endif
 @push('scripts')
     <script type="module">
         $(document).ready(function() {

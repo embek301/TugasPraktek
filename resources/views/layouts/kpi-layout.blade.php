@@ -46,7 +46,7 @@
                                 Home
                             </a>
                         </li>
-                        @if (auth()->user()->hak == 10)
+                        @if (auth()->user()->hak == 7||auth()->user()->hak == 10)
                             <li class="sidebar-item">
                                 <a href="#" class="sidebar-link" data-bs-toggle="collapse"
                                     data-bs-target="#master" aria-expanded="false" aria-controls="aumasterth"

@@ -52,10 +52,13 @@
                 </li>
                 @include('layouts.form-employee.izin')
                 @include('layouts.form-employee.cuti')
+                @include('layouts.form-employee.absensi')
+                @if (auth()->user()->hak == 7 || auth()->user()->hak == 10)
+                    @include('layouts.form-employee.approval')
+                    @include('layouts.data-laporan.index')
+                @endif
             </ul>
         </nav>
-
-
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5 pt-5">
             @yield('content')

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
@@ -16,7 +15,7 @@ class HRD
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user() && auth()->user()->hak == 8){
+        if(auth()->user() && auth()->user()->hak == 7){
             return $next($request);
         }
 

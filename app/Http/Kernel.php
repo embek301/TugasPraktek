@@ -76,6 +76,5 @@ class Kernel extends HttpKernel
         'isHead' => \App\Http\Middleware\Head::class,
         'isKabeng' => \App\Http\Middleware\Kabeng::class,
         'isAdmin' => \App\Http\Middleware\Admin::class,
-        'penilai2' => \App\Http\Middleware\Penilai2Middleware::class,
     ];
 }

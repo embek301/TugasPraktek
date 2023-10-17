@@ -4,15 +4,7 @@
     <h2 class="mb-4">
         <a href="{{ route('home') }}"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back To ASW</a>
     </h2>
-    @if (auth()->user()->hak != 10)
-        <h2>Anda bukan admin</h2>
-    @endif
-    @if (auth()->user()->hak == 5 ||
-            auth()->user()->hak == 6 ||
-            auth()->user()->hak == 7 ||
-            auth()->user()->hak == 8 ||
-            auth()->user()->hak == 9 ||
-            auth()->user()->hak == 10)
+    @if (auth()->user()->hak == 7 || auth()->user()->hak == 10)
         <ul class="list-inline mb-2 float-end">
             <li class="list-inline-item">
                 <a href="{{ route('user.create') }}" class="btn btn-gold">
@@ -45,21 +37,21 @@
                             <td><a href="{{ route('user.edit', $user->id) }}">{{ $user->nik }}</a></td>
                             <td>{{ $user->who }}</td>
                             <td>
-                                @if ($user->depts == null)
+                                @if ($user->dept == null)
                                 @else
-                                    {{ $user->depts->name }}
+                                    {{ $user->dept }}
                                 @endif
                             </td>
                             <td>
-                                @if ($user->cabs == null)
+                                @if ($user->cab == null)
                                 @else
-                                    {{ $user->cabs->name }}
+                                    {{ $user->cab }}
                                 @endif
                             </td>
                             <td>
                                 @if ($user->jabatan == null)
                                 @else
-                                    {{ $user->jabatans->name }}
+                                    {{ $user->jabatan }}
                                 @endif
                             </td>
                         </tr>

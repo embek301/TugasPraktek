@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Penilai2;
 use App\Models\Terlambat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -20,35 +21,50 @@ class EmployeeFormController extends Controller
     {
         $this->middleware('auth');
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        $pageTitle = 'List Approval Absensi';
+        $pageTitle = 'Laporan Approval Absensi';
         $terlambatData = [];
 
         // Get the currently logged-in user
         $user = auth()->user();
-        dd($user);
-        // Find the Penilai 2 associated with the current user
-        $penilai2 = $user->penilai2s;
+        $userName = $user->who;
 
-        if ($penilai2) {
-            $penilai2Name = $penilai2->name;
-          
-            // Retrieve the Terlambat data for users with the same 'nama' as Penilai 2
-            $terlambatData = Terlambat::where('nama', $penilai2Name)->get();
+        // Check if the user's name is in the Penilai2 list
+        $isPenilai2 = Penilai2::where('name', $userName)->exists();
+        $isPengganti = Terlambat::where('pengganti', $userName)->exists();
+
+        if ($isPenilai2 && $isPengganti) {
+            $terlambatData = Terlambat::where('last', $userName)
+                ->whereNotIn('jenis', ['Izin Cuti Tidak Terencana', 'Izin Cuti Terencana'])
+                ->orderBy('tanggal', 'desc')
+                ->get();
+        } elseif ($isPenilai2) {
+            $terlambatData = Terlambat::where('last', $userName)
+                ->orderBy('tanggal', 'desc')
+                ->get();
+        } else {
+            if ($user->hak == 7) {
+                $terlambatData = Terlambat::whereNotNull('approval1')
+                    ->where('approval1', '!=', '')
+                    ->whereNull('approval2')
+                    ->orderByRaw('id_terlambat DESC, tanggal DESC, jam DESC')
+                    ->get();
+            } elseif ($user->hak == 10) {
+                // If the user has hak equal to 10 (superadmin), show all data
+                $terlambatData = Terlambat::orderBy('tanggal', 'desc')
+                    ->get();
+            } else {
+                // For other cases, filter the data based on user's who attribute
+                $terlambatData = Terlambat::where('last', $userName)
+                    ->orderBy('tanggal', 'desc')
+                    ->get();
+            }
         }
 
-        return view('content.Employee.dashboard', compact('pageTitle', 'terlambatData'));
+
+        return view('content.Employee.dashboard', compact('pageTitle', 'terlambatData', 'userName', 'isPenilai2'));
     }
-
-
-
 
 
     public function create()

@@ -14,11 +14,11 @@
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <label for="id_ClockIn" class="form-label">no</label>
                                 <input class="form-control" type="text" name="id_ClockIn" id="id_ClockIn"
                                     value="{{ $idClockIn }}" readonly>
-                            </div>
+                            </div> --}}
                             <div class="col-md-6 mb-3">
                                 <label for="who" class="form-label">Nama</label>
                                 <input class="form-control @error('who')is-invalid @enderror" type="text" name="who"

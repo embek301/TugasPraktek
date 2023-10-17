@@ -15,9 +15,10 @@ return new class extends Migration {
             $table->string('nik', 20);
             $table->string('nama', 100);
             $table->date('tanggal');
-            $table->time('jam');
+            $table->time('jam')->nullable();
             $table->string('approval1')->nullable();
             $table->string('approval2')->nullable();
+            $table->string('approval3')->nullable();
             $table->date('tgl_app1')->nullable();
             $table->date('tgl_app2')->nullable();
             $table->text('alasan')->nullable();
@@ -32,6 +33,7 @@ return new class extends Migration {
             $table->string('pengganti', 100)->nullable();
             $table->text('alasan1')->nullable();
             $table->text('alasan2')->nullable();
+            $table->text('alasan3')->nullable();
             $table->binary('file')->nullable();
             $table->timestamps();
         });

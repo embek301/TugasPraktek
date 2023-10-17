@@ -68,7 +68,7 @@
                                     }
                                 @endphp
                                 @foreach ($penilai2 as $pen2)
-                                    <option value="{{ $pen2->id }}" {{ $selected == $pen2->id ? 'selected' : '' }}>
+                                    <option value="{{ $pen2->name }}" {{ $selected == $pen2->name ? 'selected' : '' }}>
                                         {{ $pen2->name }}
                                     </option>
                                 @endforeach
@@ -89,7 +89,7 @@
                                     }
                                 @endphp
                                 @foreach ($penilai3 as $pen3)
-                                    <option value="{{ $pen3->id }}" {{ $selected == $pen3->id ? 'selected' : '' }}>
+                                    <option value="{{ $pen3->name }}" {{ $selected == $pen3->name ? 'selected' : '' }}>
                                         {{ $pen3->name }}
                                     </option>
                                 @endforeach
@@ -111,7 +111,7 @@
                                     }
                                 @endphp
                                 @foreach ($penilai4 as $pen4)
-                                    <option value="{{ $pen4->id }}" {{ $selected == $pen4->id ? 'selected' : '' }}>
+                                    <option value="{{ $pen4->name }}" {{ $selected == $pen4->name ? 'selected' : '' }}>
                                         {{ $pen4->name }}
                                     </option>
                                 @endforeach
@@ -132,7 +132,7 @@
                                     }
                                 @endphp
                                 @foreach ($cabs as $cab)
-                                    <option value="{{ $cab->id }}" {{ $selected == $cab->id ? 'selected' : '' }}>
+                                    <option value="{{ $cab->name }}" {{ $selected == $cab->name ? 'selected' : '' }}>
                                         {{ $cab->name }}
                                     </option>
                                 @endforeach
@@ -153,7 +153,7 @@
                                     }
                                 @endphp
                                 @foreach ($depts as $dept)
-                                    <option value="{{ $dept->id }}" {{ $selected == $dept->id ? 'selected' : '' }}>
+                                    <option value="{{ $dept->name }}" {{ $selected == $dept->name ? 'selected' : '' }}>
                                         {{ $dept->name }}
                                     </option>
                                 @endforeach
@@ -195,7 +195,7 @@
                                     }
                                 @endphp
                                 @foreach ($golongan as $gol)
-                                    <option value="{{ $gol->id }}" {{ $selected == $gol->id ? 'selected' : '' }}>
+                                    <option value="{{ $gol->name }}" {{ $selected == $gol->name ? 'selected' : '' }}>
                                         {{ $gol->name }}
                                     </option>
                                 @endforeach
@@ -231,7 +231,7 @@
                                     }
                                 @endphp
                                 @foreach ($jabatan as $jab)
-                                    <option value="{{ $jab->id }}" {{ $selected == $jab->id ? 'selected' : '' }}>
+                                    <option value="{{ $jab->name }}" {{ $selected == $jab->name ? 'selected' : '' }}>
                                         {{ $jab->name }}
                                     </option>
                                 @endforeach

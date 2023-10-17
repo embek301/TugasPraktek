@@ -63,8 +63,8 @@
                             <label for="penilai2" class="form-label">Penilai 2</label>
                             <select name="penilai2" id="penilai2" class="form-select">
                                 @foreach ($penilai2 as $penilai2)
-                                    <option value="{{ $penilai2->id }}"
-                                        {{ old('penilai2') == $penilai2->id ? 'selected' : '' }}>
+                                    <option value="{{ $penilai2->name }}"
+                                        {{ old('penilai2') == $penilai2->name ? 'selected' : '' }}>
                                         {{ $penilai2->name }}</option>
                                 @endforeach
                             </select>
@@ -77,8 +77,8 @@
                             <select name="penilai3" id="penilai3" class="form-select">
 
                                 @foreach ($penilai3 as $penilai3)
-                                    <option value="{{ $penilai3->id }}"
-                                        {{ old('penilai3') == $penilai3->id ? 'selected' : '' }}>
+                                    <option value="{{ $penilai3->name }}"
+                                        {{ old('penilai3') == $penilai3->name ? 'selected' : '' }}>
                                         {{ $penilai3->name }}</option>
                                 @endforeach
                             </select>
@@ -90,8 +90,8 @@
                             <label for="penilai4" class="form-label">Penilai 4</label>
                             <select name="penilai4" id="penilai4" class="form-select">
                                 @foreach ($penilai4 as $penilai4)
-                                    <option value="{{ $penilai4->id }}"
-                                        {{ old('penilai4') == $penilai4->id ? 'selected' : '' }}>
+                                    <option value="{{ $penilai4->name }}"
+                                        {{ old('penilai4') == $penilai4->name ? 'selected' : '' }}>
                                         {{ $penilai4->name }}</option>
                                 @endforeach
                             </select>
@@ -103,8 +103,8 @@
                             <label for="cabang" class="form-label">Cabang</label>
                             <select name="cabang" id="cabang" class="form-select">
                                 @foreach ($cabs as $cabang)
-                                    <option value="{{ $cabang->id }}"
-                                        {{ old('cabang') == $cabang->id ? 'selected' : '' }}>
+                                    <option value="{{ $cabang->name }}"
+                                        {{ old('cabang') == $cabang->name ? 'selected' : '' }}>
                                         {{ $cabang->name }}</option>
                                 @endforeach
                             </select>
@@ -116,8 +116,8 @@
                             <label for="departemen" class="form-label">Departemen</label>
                             <select name="departemen" id="departemen" class="form-select">
                                 @foreach ($depts as $departemen)
-                                    <option value="{{ $departemen->id }}"
-                                        {{ old('departemen') == $departemen->id ? 'selected' : '' }}>
+                                    <option value="{{ $departemen->name }}"
+                                        {{ old('departemen') == $departemen->name ? 'selected' : '' }}>
                                         {{ $departemen->name }}</option>
                                 @endforeach
                             </select>
@@ -142,8 +142,8 @@
                             <select name="golongan" id="golongan" class="form-select">
 
                                 @foreach ($golongan as $gol)
-                                    <option value="{{ $gol->id }}"
-                                        {{ old('golongan') == $gol->id ? 'selected' : '' }}>
+                                    <option value="{{ $gol->name }}"
+                                        {{ old('golongan') == $gol->name ? 'selected' : '' }}>
                                         {{ $gol->name }}</option>
                                 @endforeach
                             </select>
@@ -169,7 +169,7 @@
                             <label for="jabatan" class="form-label">Jabatan</label>
                             <select name="jabatan" id="jabatan" class="form-select">
                                 @foreach ($jabatan as $jab)
-                                    <option value="{{ $jab->id }}" {{ old('jab') == $jab->id ? 'selected' : '' }}>
+                                    <option value="{{ $jab->name }}" {{ old('jab') == $jab->name ? 'selected' : '' }}>
                                         {{ $jab->name }}</option>
                                 @endforeach
                             </select>

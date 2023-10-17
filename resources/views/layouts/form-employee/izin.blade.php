@@ -30,8 +30,8 @@
                 <span class="fa fa-clipboard mr-2"></span> Izin Sakit
             </a>
         </li>
-        <li class="sidebar-item ">
-            <a href="" class="nav-link">
+        <li class="sidebar-item @if ($currentRouteName == 'izin-lembur.index') active @endif">
+            <a href="{{route('izin-lembur.index')}}" class="nav-link">
                 <span class="fa fa-clipboard mr-2"></span> Izin Lembur
             </a>
         </li>
@@ -50,6 +50,7 @@
             'izin-clock-in.index',
             'izin-clock-out.index',
             'izin-sakit.index',
+            'izin-lembur.index',
         ]))
         openIzinDataSubMenu();
     @endif

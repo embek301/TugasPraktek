@@ -64,7 +64,7 @@
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5 pt-5">
             @yield('content')
-
+            @include('sweetalert::alert')
         </div>
     </div>
     @vite('resources/js/main.js')

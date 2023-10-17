@@ -25,7 +25,9 @@ class UserController extends Controller
     public function index()
     {
         $pageTitle = 'Karyawan Aktif';
-        $users = User::where('hak', '<>', 10)->where('aktif', '<>', 0)->get();
+        $users = User::whereNotIn('hak', [10, 7])
+            ->where('aktif', '<>', 0)
+            ->get();
         return view('content.KPI.Master.User.index', compact('pageTitle', 'users'));
     }
 
@@ -124,7 +126,8 @@ class UserController extends Controller
             'who.required' => 'Nama harus diisi.'
         ];
         $validator = Validator::make($request->all(), [
-            'nik' => 'required|unique:users,nik,' . $id, // Add the ID to exclude from unique check
+            'nik' => 'required|unique:users,nik,' . $id,
+            // Add the ID to exclude from unique check
             'email' => 'required|unique:users,email,' . $id,
             'who' => 'required',
             'username' => 'required|unique:users,username,' . $id,
@@ -175,7 +178,7 @@ class UserController extends Controller
 
         // Save the changes to the database
 
-        
+
         $users->save();
         Alert::success('Berhasil diedit', 'Data Karyawan Berhasil Diedit');
         return redirect()->route('user.index');
@@ -195,17 +198,23 @@ class UserController extends Controller
         $users->save();
         return redirect()->route('user.index')->with('success', 'User deactivated successfully');
     }
-        public function showChangePassword()
+    public function showChangePassword()
     {
-        $pageTitle='Ganti Password';
-        return view('auth.changepassword',compact('pageTitle'));
+        $pageTitle = 'Ganti Password';
+        return view('auth.changepassword', compact('pageTitle'));
     }
     public function changePassword(Request $request)
     {
+        $messages = [
+            'current_password.required' => 'Password saat ini harus diisi.',
+            'new_password.required' => 'Password baru harus diisi.',
+            'new_password.confirmed' => 'Password baru tidak cocok.',
+        ];
+
         $request->validate([
             'current_password' => 'required',
             'new_password' => 'required|confirmed',
-        ]);
+        ], $messages);
 
         // Mengambil pengguna yang saat ini login
         $users = Auth::user();
@@ -215,10 +224,10 @@ class UserController extends Controller
             $users->update([
                 'password' => Hash::make($request->new_password),
             ]);
-
-            return redirect()->route('home')->with('success', 'Password berhasil diubah.');
+            Alert::success('Password Diupdate', 'Password Berhasil Diganti');
+            return redirect()->route('home');
         } else {
-            return redirect()->back()->withErrors(['current_password' => 'Password saat ini salah.']);
+            return redirect()->back()->withErrors(['current_password' => 'Password tidak sesuai.']);
         }
     }
 

@@ -1,5 +1,5 @@
 @extends('layouts.login-layout')
-
+@section('content')
 <div class="container-sm my-5">
     <div class="row justify-content-center">
         <div class="p-5 rounded-3 col-lg-4" style="width: 25rem; background-color: #d4d5d5; border-radius: 39px;">
@@ -40,3 +40,4 @@
         </div>
     </div>
 </div>
+@endsection
