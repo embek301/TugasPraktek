@@ -10,7 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class penilai2Controller extends Controller
+class Penilai2Controller extends Controller
 {
     /**
      * Create a new controller instance.
